@@ -1,16 +1,51 @@
+$primary: #00a4ef;
+$secondary: #00306c;
+
 * {
   font-family: "Roboto";
 }
 
 .LandingPage {
-  .left-column {
-    margin-left: 15vw;
-  }
   .landing-icon {
-    color: #007bff;
+    color: $primary;
     font-size: 72px;
   }
   .footer {
-    background-color: #00306c;
+    background-color: $secondary;
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+  .monitor-picture {
+    max-width: 400px;
+  }
+  .left-column {
+    padding-left: 15%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .sub-message,
+    .footer {
+      font-size: 0.9rem;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .sub-message {
+      font-size: 0.9rem;
+    }
+
+    .left-column {
+      padding-left: 0;
+    }
+  }
+}
+
+.Login,
+.Signup,
+.ForgotPassword {
+  min-height: calc(100vh - 91.5px - 32px);
+  .card-container {
+    max-width: 400px;
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Subnavbar from "./Subnavbar";
 import { Jumbotron, Container, Row, Col } from "react-bootstrap";
-import monitor from "../assets/images/monitor.png";
+import mockup from "../assets/images/mockup.png";
 import "../index.scss";
 import CodeIcon from "@material-ui/icons/Code";
 import GroupIcon from "@material-ui/icons/Group";
@@ -30,16 +30,20 @@ export default function LandingPage() {
                 </a>
               </div>
             </Col>
-            <Col xs={12} lg={6} className="d-flex justify-content-end p-0">
+            <Col
+              xs={12}
+              lg={6}
+              className="d-flex justify-content-center mt-xs-5 mt-md-0"
+            >
               <img
                 className="mt-5 w-100 monitor-picture"
-                src={monitor}
+                src={mockup}
                 alt="Monitor"
               />
             </Col>
           </Row>
         </Jumbotron>
-        <section class="section py-5">
+        <section className="section py-5">
           <Container className="text-center py-5">
             <h1>Come together</h1>
             <p className="pb-5">

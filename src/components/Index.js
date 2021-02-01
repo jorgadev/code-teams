@@ -14,7 +14,7 @@ export default function Index() {
       <main className="d-flex">
         <Router>
           <Sidebar />
-          <div className="w-100 bg-white wrapper py-1 px-3">
+          <div className="w-100 bg-white wrapper p-3">
             <Switch>
               <Route exact path="/dashboard">
                 <Dashboard />

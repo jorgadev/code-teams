@@ -17,10 +17,10 @@ export default function Subnavbar(props) {
         {props.message !== "back-icon" ? (
           props.message
         ) : (
-          <div class="text-left d-flex justify-content-between">
+          <div className="text-left d-flex justify-content-between">
             <ArrowBackIos onClick={handleBackClick} className="back-icon" />
-            <p class="signed-in">
-              Signed in as <span class="username">{username}</span>
+            <p className="signed-in">
+              Signed in as <span className="username">{username}</span>
             </p>
           </div>
         )}

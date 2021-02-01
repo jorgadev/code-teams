@@ -1,41 +1,36 @@
-import React, { useState } from "react";
-import { Card, Button, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Subnavbar from "./Subnavbar";
+import Sidebar from "./Sidebar";
+import Dashboard from "./Dashboard";
+import Teams from "./Teams";
+import Projects from "./Projects";
+import Settings from "./Settings";
 
-export default function Dashboard() {
-  const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
-  const history = useHistory();
-
-  // Log out user
-  async function handleLogout() {
-    setError("");
-
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
-
+export default function Index() {
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {currentUser.email}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-            Update Profile
-          </Link>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
-          Log Out
-        </Button>
+      <Subnavbar message="back-icon" />
+      <div className="d-flex">
+        <Router>
+          <Sidebar />
+          <div className="p-2 w-100">
+            <Switch>
+              <Route exact path="/index">
+                <Dashboard />
+              </Route>
+              <Route path="/index/teams">
+                <Teams />
+              </Route>
+              <Route path="/index/projects">
+                <Projects />
+              </Route>
+              <Route path="/index/settings">
+                <Settings />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
       </div>
     </>
   );

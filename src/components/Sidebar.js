@@ -1,0 +1,48 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+import HomeIcon from "@material-ui/icons/Home";
+import GroupIcon from "@material-ui/icons/Group";
+import ListIcon from "@material-ui/icons/List";
+import SettingsIcon from "@material-ui/icons/Settings";
+
+export default function Sidebar() {
+  return (
+    <div className="Sidebar">
+      <div className="d-flex flex-column h-100 position-relative">
+        <NavLink
+          className="icon-block"
+          activeClassName="selected"
+          activeStyle={{ backgroundColor: "red" }}
+          to="/index"
+        >
+          <HomeIcon className="side-icon" />
+        </NavLink>
+        <NavLink
+          className="icon-block"
+          activeClassName="selected"
+          activeStyle={{ backgroundColor: "red" }}
+          to="/index/teams"
+        >
+          <GroupIcon className="side-icon" />
+        </NavLink>
+        <NavLink
+          className="icon-block"
+          activeClassName="selected"
+          activeStyle={{ backgroundColor: "red" }}
+          to="/index/projects"
+        >
+          <ListIcon className="side-icon" />
+        </NavLink>
+        <NavLink
+          className="icon-block settings-icon"
+          activeClassName="selected"
+          activeStyle={{ backgroundColor: "red" }}
+          to="/index/settings"
+        >
+          <SettingsIcon className="side-icon" />
+        </NavLink>
+      </div>
+    </div>
+  );
+}

@@ -1,5 +1,7 @@
 $primary: #00a4ef;
 $secondary: #00306c;
+$lightgray: #e5e5e5;
+$darkblue: #002656;
 
 * {
   font-family: "Roboto";
@@ -49,3 +51,75 @@ $secondary: #00306c;
     max-width: 400px;
   }
 }
+
+.Navbar {
+  height: 92px;
+}
+
+.Subnavbar {
+  height: 35px;
+  .back-icon {
+    cursor: pointer;
+  }
+  .back-icon:hover {
+    transform: scale(1.1);
+  }
+}
+
+.Sidebar {
+  height: calc(100vh - 92px - 35px);
+  width: 60px;
+  display: inline-block;
+  background-color: $secondary;
+
+  .icon-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $lightgray;
+    width: 60px;
+    height: 60px;
+
+    .side-icon {
+      font-size: 32px;
+    }
+  }
+
+  .active {
+    color: white !important;
+    background-color: $darkblue;
+  }
+
+  .settings-icon {
+    bottom: 0;
+    position: absolute;
+  }
+}
+
+// .scroller {
+//   scrollbar-width: none; /* Firefox */
+//   -ms-overflow-style: none; /* IE 10+ */
+//   &::-webkit-scrollbar {
+//     width: 1px;
+//     background: transparent; /* Chrome/Safari/Webkit */
+//   }
+// }
+
+/* <div
+          style={{
+            width: "100%",
+            backgroundColor: "blue",
+            height: "calc(100vh - 92px - 35px)",
+            fontSize: "72px",
+            overflow: "scroll",
+          }}
+          className="scroller"
+        >
+          orem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets cont
+        </div> */

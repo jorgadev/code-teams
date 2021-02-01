@@ -12,6 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
+  // Log user in and redirect to "/index"
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -19,7 +20,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      history.push("/index");
     } catch {
       setError("Failed to log in");
     }

@@ -8,7 +8,7 @@ export default function Navbar() {
     <nav>
       <Container className="d-flex justify-content-between align-items-center py-3">
         <a href="/" className="text-center text-md-left">
-          <img className="w-50" src={logo} />
+          <img className="w-50" src={logo} alt="Logo" />
         </a>
         <div className="menu d-none d-md-flex">
           <a href="/signup">

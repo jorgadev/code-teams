@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 
 import logo from "../assets/images/logo.png";
 
@@ -10,7 +10,7 @@ export default function Navbar() {
         <a href="/" className="text-center text-md-left">
           <img className="w-50" src={logo} alt="Logo" />
         </a>
-        {/* <div className="menu d-none d-md-flex">
+        <div className="menu d-none d-md-flex">
           <a href="/signup">
             <Button variant="primary" className="mr-3">
               Sign Up
@@ -19,7 +19,7 @@ export default function Navbar() {
           <a href="login">
             <Button variant="outline-primary">Log In</Button>
           </a>
-        </div> */}
+        </div>
       </Container>
     </nav>
   );

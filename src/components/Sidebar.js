@@ -13,32 +13,32 @@ export default function Sidebar() {
         <NavLink
           className="icon-block"
           activeClassName="selected"
-          activeStyle={{ backgroundColor: "red" }}
-          to="/index"
+          activeStyle={{ backgroundColor: "#002656", color: "#fff" }}
+          to="/dashboard"
         >
           <HomeIcon className="side-icon" />
         </NavLink>
         <NavLink
           className="icon-block"
           activeClassName="selected"
-          activeStyle={{ backgroundColor: "red" }}
-          to="/index/teams"
+          activeStyle={{ backgroundColor: "#002656", color: "#fff" }}
+          to="/teams"
         >
           <GroupIcon className="side-icon" />
         </NavLink>
         <NavLink
           className="icon-block"
           activeClassName="selected"
-          activeStyle={{ backgroundColor: "red" }}
-          to="/index/projects"
+          activeStyle={{ backgroundColor: "#002656", color: "#fff" }}
+          to="/projects"
         >
           <ListIcon className="side-icon" />
         </NavLink>
         <NavLink
           className="icon-block settings-icon"
           activeClassName="selected"
-          activeStyle={{ backgroundColor: "red" }}
-          to="/index/settings"
+          activeStyle={{ backgroundColor: "#002656", color: "#fff" }}
+          to="/settings"
         >
           <SettingsIcon className="side-icon" />
         </NavLink>

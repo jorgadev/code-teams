@@ -9,29 +9,29 @@ import Settings from "./Settings";
 
 export default function Index() {
   return (
-    <>
+    <div className="Index">
       <Subnavbar message="back-icon" />
-      <div className="d-flex">
+      <main className="d-flex">
         <Router>
           <Sidebar />
-          <div className="p-2 w-100">
+          <div className="w-100 bg-white wrapper py-1 px-3">
             <Switch>
-              <Route exact path="/index">
+              <Route exact path="/dashboard">
                 <Dashboard />
               </Route>
-              <Route path="/index/teams">
+              <Route path="/teams">
                 <Teams />
               </Route>
-              <Route path="/index/projects">
+              <Route path="/projects">
                 <Projects />
               </Route>
-              <Route path="/index/settings">
+              <Route path="/settings">
                 <Settings />
               </Route>
             </Switch>
           </div>
         </Router>
-      </div>
-    </>
+      </main>
+    </div>
   );
 }

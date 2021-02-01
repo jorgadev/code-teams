@@ -64,6 +64,12 @@ $darkblue: #002656;
   .back-icon:hover {
     transform: scale(1.1);
   }
+  .signed-in {
+    color: $lightgray;
+    .username {
+      color: white;
+    }
+  }
 }
 
 .Sidebar {
@@ -96,30 +102,17 @@ $darkblue: #002656;
   }
 }
 
-// .scroller {
-//   scrollbar-width: none; /* Firefox */
-//   -ms-overflow-style: none; /* IE 10+ */
-//   &::-webkit-scrollbar {
-//     width: 1px;
-//     background: transparent; /* Chrome/Safari/Webkit */
-//   }
-// }
-
-/* <div
-          style={{
-            width: "100%",
-            backgroundColor: "blue",
-            height: "calc(100vh - 92px - 35px)",
-            fontSize: "72px",
-            overflow: "scroll",
-          }}
-          className="scroller"
-        >
-          orem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets cont
-        </div> */
+.Index {
+  .main {
+    background-color: $lightgray;
+  }
+  .wrapper {
+    height: calc(100vh - 92px - 35px);
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

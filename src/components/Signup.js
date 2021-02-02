@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
 import insertIntoDb from "../database";
 
@@ -13,6 +13,10 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  if (currentUser) {
+    return <Redirect to={"/dashboard"} />;
+  }
 
   // Register user and redirect to "/index"
   async function handleSubmit(e) {

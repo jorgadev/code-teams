@@ -6,6 +6,7 @@ $darkblue: #002656;
 
 * {
   font-family: "Roboto";
+  scroll-behavior: smooth;
 }
 
 .LandingPage {
@@ -36,6 +37,10 @@ $darkblue: #002656;
 
 .Navbar {
   height: 92px;
+
+  .logo {
+    width: 250px;
+  }
 }
 
 .Subnavbar {

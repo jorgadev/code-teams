@@ -4,6 +4,12 @@ import { Modal, Button, Form } from "react-bootstrap";
 
 function handleSubmit() {}
 
+function membersChangeHandler(e) {
+  if (e.key === ",") {
+    console.log(e.target.value);
+  }
+}
+
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -14,7 +20,9 @@ function MyVerticallyCenteredModal(props) {
     >
       <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Add Team</Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Create a Team
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group id="team-name">
@@ -23,11 +31,14 @@ function MyVerticallyCenteredModal(props) {
           </Form.Group>
           <Form.Group id="members">
             <Form.Label>Members</Form.Label>
-            <Form.Control as="textarea" />
+            <Form.Control
+              as="textarea"
+              onKeyPress={(e) => membersChangeHandler(e)}
+            />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="submit">Save</Button>
+          <Button type="submit">Create</Button>
         </Modal.Footer>
       </Form>
     </Modal>

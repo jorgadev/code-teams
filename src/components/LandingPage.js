@@ -13,10 +13,10 @@ export default function LandingPage() {
       <div className="LandingPage">
         <Subnavbar message="Improve your team experience  with new features." />
         <Jumbotron className="px-0 py-5">
-          <Row className="m-0">
+          <Row className="container mx-auto">
             <Col
               xs={12}
-              lg={6}
+              lg={8}
               className="left-column d-flex flex-column justify-content-center text-center text-lg-left"
             >
               <h1 className="text-primary">Be a Leader!</h1>
@@ -32,7 +32,7 @@ export default function LandingPage() {
             </Col>
             <Col
               xs={12}
-              lg={6}
+              lg={4}
               className="d-flex justify-content-center mt-xs-5 mt-md-0"
             >
               <img

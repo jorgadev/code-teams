@@ -58,49 +58,51 @@ export default function Settings() {
     <div className="Settings">
       <h3>Settings</h3>
       <hr className="mt-3 mb-5" />
-      <Avatar />
-      <hr className="w-50 mx-auto mt-5" />
-      <Card className="w-50 mx-auto">
-        <Card.Body>
-          <h2 className="text-center mb-4">Update Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                ref={emailRef}
-                required
-                defaultValue={currentUser.email}
-              />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                ref={passwordRef}
-                placeholder="Leave blank to keep the same"
-              />
-            </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control
-                type="password"
-                ref={passwordConfirmRef}
-                placeholder="Leave blank to keep the same"
-              />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Update
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-      <hr className="w-50 mx-auto mt-5" />
-      <div className="w-100 text-center mb-5">
-        <Button variant="link" onClick={handleLogout}>
-          Log Out
-        </Button>
+      <div className="settings-wrapper w-50 mx-auto">
+        <Avatar />
+        <hr className="mx-auto mt-5" />
+        <Card className="mx-auto">
+          <Card.Body>
+            <h2 className="text-center mb-4">Update Profile</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group id="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  ref={emailRef}
+                  required
+                  defaultValue={currentUser.email}
+                />
+              </Form.Group>
+              <Form.Group id="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  ref={passwordRef}
+                  placeholder="Leave blank to keep the same"
+                />
+              </Form.Group>
+              <Form.Group id="password-confirm">
+                <Form.Label>Password Confirmation</Form.Label>
+                <Form.Control
+                  type="password"
+                  ref={passwordConfirmRef}
+                  placeholder="Leave blank to keep the same"
+                />
+              </Form.Group>
+              <Button disabled={loading} className="w-100" type="submit">
+                Update
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+        <hr className="mx-auto mt-5" />
+        <div className="text-center mb-5">
+          <Button variant="link" onClick={handleLogout}>
+            Log Out
+          </Button>
+        </div>
       </div>
     </div>
   );

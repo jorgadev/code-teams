@@ -22,25 +22,6 @@ $darkblue: #002656;
   .monitor-picture {
     max-width: 400px;
   }
-  .left-column {
-    padding-left: 15%;
-  }
-
-  @media screen and (max-width: 768px) {
-    .sub-message,
-    .footer {
-      font-size: 0.9rem;
-    }
-  }
-  @media screen and (max-width: 992px) {
-    .sub-message {
-      font-size: 0.9rem;
-    }
-
-    .left-column {
-      padding-left: 0;
-    }
-  }
 }
 
 .Login,
@@ -48,7 +29,7 @@ $darkblue: #002656;
 .ForgotPassword {
   min-height: calc(100vh - 91.5px - 32px);
   .card-container {
-    max-width: 400px;
+    max-width: 320px;
   }
 }
 
@@ -123,5 +104,42 @@ $darkblue: #002656;
     height: 150px;
     border: 1px solid $lightgray;
     border-radius: 50%;
+  }
+}
+
+.Settings {
+  .settings-wrapper {
+    min-width: 320px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .LandingPage {
+    .sub-message,
+    .footer {
+      font-size: 0.9rem;
+    }
+  }
+
+  .Sidebar {
+    position: fixed;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    z-index: 1;
+
+    .wrapper {
+      flex-direction: row !important;
+      justify-content: space-around;
+
+      .settings-icon {
+        position: relative !important;
+      }
+    }
+  }
+  .Settings {
+    .settings-wrapper {
+      padding-bottom: 50px;
+    }
   }
 }

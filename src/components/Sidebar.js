@@ -9,7 +9,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 export default function Sidebar() {
   return (
     <div className="Sidebar">
-      <div className="d-flex flex-column h-100 position-relative">
+      <div className="d-flex flex-column h-100 position-relative wrapper">
         <NavLink
           className="icon-block"
           activeClassName="selected"

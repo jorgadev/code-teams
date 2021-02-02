@@ -1,6 +1,7 @@
 $primary: #00a4ef;
 $secondary: #00306c;
 $lightgray: #e5e5e5;
+$darkgray: #cecece;
 $darkblue: #002656;
 
 * {
@@ -29,7 +30,7 @@ $darkblue: #002656;
 .ForgotPassword {
   min-height: calc(100vh - 91.5px - 32px);
   .card-container {
-    max-width: 320px;
+    max-width: 380px;
   }
 }
 
@@ -141,5 +142,21 @@ $darkblue: #002656;
     .settings-wrapper {
       padding-bottom: 50px;
     }
+  }
+}
+
+.CreateTeam {
+  width: 200px;
+  height: 200px;
+  background-color: $lightgray;
+  border: 3px dashed $darkgray;
+  color: $darkgray;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+
+  .add-icon {
+    font-size: 48px;
   }
 }

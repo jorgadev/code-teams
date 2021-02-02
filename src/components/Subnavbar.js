@@ -5,9 +5,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function Subnavbar(props) {
-  let history = useHistory();
   const { currentUser } = useAuth();
+  let history = useHistory();
   let username;
+
   if (currentUser) {
     username = currentUser.email.split("@")[0];
   }

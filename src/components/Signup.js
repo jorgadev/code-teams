@@ -3,12 +3,13 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
+import insertIntoDb from "../database";
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -26,6 +27,14 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      if (currentUser) {
+        insertIntoDb({
+          type: "blankUser",
+          data: { id: currentUser.uid },
+        });
+      } else {
+        setError("Failed to create an user");
+      }
       history.push("/dashboard");
     } catch {
       setError("Failed to create an account");

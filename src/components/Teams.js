@@ -1,6 +1,7 @@
 import React from "react";
 import Team from "./Team";
 import { db } from "../firebase";
+import CreateTeam from "./CreateTeam";
 
 export default function Teams() {
   // inserting into db
@@ -15,6 +16,7 @@ export default function Teams() {
       <h3>Teams</h3>
       <hr className="mb-3" />
       <Team />
+      <CreateTeam />
     </div>
   );
 }

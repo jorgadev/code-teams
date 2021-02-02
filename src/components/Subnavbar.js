@@ -5,7 +5,10 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function Subnavbar(props) {
   const { currentUser } = useAuth();
-  const username = currentUser.email.split("@")[0];
+  let username;
+  if (currentUser) {
+    username = currentUser.email.split("@")[0];
+  }
 
   function handleBackClick() {
     console.log("Back clicked");

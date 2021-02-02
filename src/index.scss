@@ -116,3 +116,12 @@ $darkblue: #002656;
     }
   }
 }
+
+.Avatar {
+  .avatar-preview {
+    width: 150px;
+    height: 150px;
+    border: 1px solid $lightgray;
+    border-radius: 50%;
+  }
+}

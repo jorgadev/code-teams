@@ -12,9 +12,9 @@ import Navbar from "./Navbar";
 function App() {
   return (
     <>
-      <Navbar />
       <Router>
         <AuthProvider>
+          <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
           </Switch>

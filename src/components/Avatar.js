@@ -5,7 +5,7 @@ import Avatar from "react-avatar-edit";
 import defaultAvatar from "../assets/images/default-avatar.jpg";
 
 export default function App() {
-  let src = defaultAvatar;
+  const [src, setSrc] = useState(defaultAvatar);
   const [preview, setPreview] = useState(null);
   const [changeDisplay, setChangeDisplay] = useState("d-none");
   const [avatarDisplay, setAvatarDisplay] = useState("d-flex");
@@ -34,7 +34,8 @@ export default function App() {
     setAvatarDisplay("d-flex");
   }
   function saveAvatar() {
-    showEditor();
+    setSrc(preview);
+    showAvatar();
   }
 
   return (

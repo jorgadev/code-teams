@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { Modal, Button, Form } from "react-bootstrap";
 
-function handleSubmit() {}
+function handleSubmit() {
+  // inserting into db
+  // const teamsRef = db.ref("Teams");
+  // teamsRef.push("team one");
+}
 
 function membersChangeHandler(e) {
   if (e.key === ",") {

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
-import insertIntoDb from "../database";
+import { dbInsert } from "../database";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -12,8 +12,8 @@ export default function Signup() {
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
+  // If there is user logged, automatically redirect to /dashboard
   if (currentUser) {
     return <Redirect to={"/dashboard"} />;
   }
@@ -30,16 +30,27 @@ export default function Signup() {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      if (currentUser) {
-        insertIntoDb({
-          type: "blankUser",
-          data: { id: currentUser.uid },
-        });
-      } else {
-        setError("Failed to create an user");
-      }
-      history.push("/dashboard");
+      await signup(emailRef.current.value, passwordRef.current.value).then(
+        (res) => {
+          if (res.user) {
+            const username = res.user.email.split("@")[0];
+            const userObj = {
+              type: "blankUser",
+              data: {
+                id: res.user.uid,
+                avatar: "default-avatar-url",
+                memberof: "[]",
+                projects: "[]",
+                username: username,
+              },
+            };
+            dbInsert(userObj);
+          } else {
+            setError("Failed to create user");
+          }
+        }
+      );
+      //history.push("/dashboard");
     } catch {
       setError("Failed to create an account");
     }

@@ -64,7 +64,11 @@ export default function App() {
       <Col
         className={`${avatarDisplay} flex-column justify-content-center align-items-center`}
       >
-        <img src={src} alt="Preview" className="avatar-preview" />
+        <img
+          src={!src ? defaultAvatar : src}
+          alt="Preview"
+          className="avatar-preview"
+        />
         <Button onClick={showEditor} className="mt-2">
           Change
         </Button>

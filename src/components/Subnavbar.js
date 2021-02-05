@@ -9,10 +9,6 @@ export default function Subnavbar(props) {
   let history = useHistory();
   let username;
 
-  if (currentUser) {
-    username = currentUser.email.split("@")[0];
-  }
-
   async function backClickHandler() {
     history.goBack();
   }
@@ -29,7 +25,7 @@ export default function Subnavbar(props) {
           <div className="text-left d-flex justify-content-between">
             <ArrowBackIos onClick={backClickHandler} className="back-icon" />
             <p className="signed-in">
-              Signed in as <span className="username">{username}</span>
+              Signed in as <span className="username">{props.username}</span>
             </p>
           </div>
         )}

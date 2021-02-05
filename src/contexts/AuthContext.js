@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   // By default load new user
   const [loading, setLoading] = useState(true);
+  const [userObj, setUserObj] = useState({});
 
   // Firebase functions that return promise which can be used in Signup, Login, Logout etc. components
   function signup(email, password) {
@@ -38,11 +39,22 @@ export function AuthProvider({ children }) {
     let userObj = {
       id: user.uid,
       avatar: "default",
-      memberof: "[]",
-      projects: "[]",
+      memberof: [],
+      projects: [],
       username: user.email.split("@")[0],
     };
-    firestore.collection("users").add({ userObj });
+    firestore.collection("users").add(userObj);
+  }
+
+  // Find an user from firestore by passed id
+  async function getActiveUser(id) {
+    // Wait for data to be fetched (search for users with same id)
+    const data = await firestore
+      .collection("users")
+      .where("id", "==", id)
+      .get();
+    // Get data from each user fetched from db
+    return data.docs.map((d) => d.data());
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
@@ -58,6 +70,7 @@ export function AuthProvider({ children }) {
   // Provides all of the information
   const value = {
     currentUser,
+    userObj,
     login,
     signup,
     logout,
@@ -65,6 +78,7 @@ export function AuthProvider({ children }) {
     updateEmail,
     updatePassword,
     insertDefaultUser,
+    getActiveUser,
   };
 
   return (

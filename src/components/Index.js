@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
 import Sidebar from "./Sidebar";
@@ -7,12 +7,20 @@ import Teams from "./Teams";
 import Projects from "./Projects";
 import Settings from "./Settings";
 import Navbar from "./Navbar";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Index() {
+  const { currentUser, getActiveUser, userObj } = useAuth();
+  const [activeUser, setActiveUser] = useState({});
+
+  useEffect(() => {
+    getActiveUser(currentUser.uid).then((res) => setActiveUser(res[0]));
+  }, [currentUser]);
+
   return (
     <div className="Index">
       <Navbar />
-      <Subnavbar message="back-icon" />
+      <Subnavbar message="back-icon" username={activeUser.username} />
       <main className="d-flex">
         <Router>
           <Sidebar />

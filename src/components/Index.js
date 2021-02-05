@@ -6,10 +6,12 @@ import Dashboard from "./Dashboard";
 import Teams from "./Teams";
 import Projects from "./Projects";
 import Settings from "./Settings";
+import Navbar from "./Navbar";
 
 export default function Index() {
   return (
     <div className="Index">
+      <Navbar />
       <Subnavbar message="back-icon" />
       <main className="d-flex">
         <Router>

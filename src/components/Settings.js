@@ -1,9 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import Avatar from "./Avatar";
-import { db } from "../firebase";
 
 export default function Settings() {
   const emailRef = useRef();
@@ -13,20 +12,6 @@ export default function Settings() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
-  // On first load get user data and pass them to showUserData function
-  useEffect(() => {
-    db.ref()
-      .child("Users")
-      .orderByChild("id")
-      .equalTo(currentUser.uid)
-      .on("value", (snap) => showUserData(Object.values(snap.val())[0]));
-  }, []);
-
-  function showUserData(userData) {
-    // userData fetched from database
-    console.log(userData);
-  }
 
   // Change user's email
   function handleSubmit(e) {

@@ -7,22 +7,14 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import LandingPage from "./LandingPage";
-import Navbar from "./Navbar";
 
 function App() {
   return (
     <>
       <Router>
         <AuthProvider>
-          <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
-          </Switch>
-        </AuthProvider>
-      </Router>
-      <Router>
-        <AuthProvider>
-          <Switch>
             <PrivateRoute path="/dashboard" component={Index} />
             <PrivateRoute path="/teams" component={Index} />
             <PrivateRoute path="/projects" component={Index} />

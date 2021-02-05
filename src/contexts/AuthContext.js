@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 // Auth module that is created in firebase.js file
-import { auth } from "../firebase";
+import { auth, storage, firestore } from "../firebase";
 
 // Create context to be able to access current user and other info anywhere in app
 const AuthContext = React.createContext();
@@ -34,6 +34,16 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
+  function insertDefaultUser(user) {
+    let userObj = {
+      id: user.uid,
+      avatar: "default",
+      memberof: "[]",
+      projects: "[]",
+      username: user.email.split("@")[0],
+    };
+    firestore.collection("users").add({ userObj });
+  }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
   useEffect(() => {
@@ -54,6 +64,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    insertDefaultUser,
   };
 
   return (

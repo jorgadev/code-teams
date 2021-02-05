@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
+import Navbar from "./Navbar";
 
 export default function Login() {
   const emailRef = useRef();
@@ -34,6 +35,7 @@ export default function Login() {
 
   return (
     <>
+      <Navbar />
       <Subnavbar message={"Feel free to join us!"} />
       <div className="Login d-flex justify-content-center align-items-center">
         <div className="w-100 card-container">

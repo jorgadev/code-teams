@@ -6,11 +6,13 @@ import "../index.scss";
 import CodeIcon from "@material-ui/icons/Code";
 import GroupIcon from "@material-ui/icons/Group";
 import TocIcon from "@material-ui/icons/Toc";
+import Navbar from "./Navbar";
 
 export default function LandingPage() {
   return (
     <>
       <div className="LandingPage">
+        <Navbar />
         <Subnavbar message="Improve your team experience  with new features." />
         <Jumbotron className="px-0 py-5">
           <Row className="container mx-auto">

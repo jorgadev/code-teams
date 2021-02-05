@@ -1,17 +1,18 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
-import { dbInsert } from "../database";
+import Navbar from "./Navbar";
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup, currentUser } = useAuth();
+  const { signup, currentUser, insertDefaultUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   // If there is user logged, automatically redirect to /dashboard
   if (currentUser) {
@@ -32,25 +33,10 @@ export default function Signup() {
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value).then(
         (res) => {
-          if (res.user) {
-            const username = res.user.email.split("@")[0];
-            const userObj = {
-              type: "blankUser",
-              data: {
-                id: res.user.uid,
-                avatar: "default-avatar-url",
-                memberof: "[]",
-                projects: "[]",
-                username: username,
-              },
-            };
-            dbInsert(userObj);
-          } else {
-            setError("Failed to create user");
-          }
+          insertDefaultUser(res.user);
         }
       );
-      //history.push("/dashboard");
+      history.push("/dashboard");
     } catch {
       setError("Failed to create an account");
     }
@@ -60,6 +46,7 @@ export default function Signup() {
 
   return (
     <>
+      <Navbar />
       <Subnavbar message={"Feel free to join us!"} />
       <div className="Signup d-flex justify-content-center align-items-center">
         <div className="w-100 card-container">

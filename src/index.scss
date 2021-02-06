@@ -9,6 +9,10 @@ $darkblue: #002656;
   scroll-behavior: smooth;
 }
 
+ul {
+  list-style: none;
+}
+
 .LandingPage {
   .landing-icon {
     color: $primary;
@@ -163,5 +167,32 @@ $darkblue: #002656;
 
   .add-icon {
     font-size: 48px;
+  }
+}
+
+.TeamsModal {
+  .members-form-group {
+    ul {
+      margin: 0;
+      padding: 0;
+
+      .member-container {
+        border: 1px solid $darkgray;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        &:hover {
+          cursor: pointer;
+          background-color: $lightgray;
+        }
+
+        .member-avatar {
+          width: 50px;
+          border: 1px solid $lightgray;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+      }
+    }
   }
 }

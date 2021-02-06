@@ -10,8 +10,8 @@ import Navbar from "./Navbar";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Index() {
-  const { currentUser, getActiveUser, userObj } = useAuth();
-  const [activeUser, setActiveUser] = useState({});
+  const { currentUser, getActiveUser } = useAuth();
+  const [activeUser, setActiveUser] = useState();
 
   useEffect(() => {
     getActiveUser(currentUser.uid).then((res) => setActiveUser(res[0]));
@@ -19,8 +19,10 @@ export default function Index() {
 
   return (
     <div className="Index">
-      <Navbar />
-      <Subnavbar message="back-icon" username={activeUser.username} />
+      <Navbar showButtons={activeUser ? "out" : "in"} />
+      {activeUser && (
+        <Subnavbar message="back-icon" username={activeUser.username} />
+      )}
       <main className="d-flex">
         <Router>
           <Sidebar />
@@ -29,14 +31,17 @@ export default function Index() {
               <Route exact path="/dashboard">
                 <Dashboard />
               </Route>
-              <Route path="/teams">
-                <Teams />
-              </Route>
+              {activeUser && (
+                <Route path="/teams">
+                  <Teams activeUser={activeUser} />
+                </Route>
+              )}
+
               <Route path="/projects">
                 <Projects />
               </Route>
               <Route path="/settings">
-                <Settings />
+                <Settings user={activeUser} />
               </Route>
             </Switch>
           </div>

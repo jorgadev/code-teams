@@ -1,56 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
-import { Modal, Button, Form } from "react-bootstrap";
+import TeamsModal from "./TeamsModal";
+import { useAuth } from "../contexts/AuthContext";
 
-function handleSubmit() {
-  // inserting into db
-  // const teamsRef = db.ref("Teams");
-  // teamsRef.push("team one");
-}
-
-function membersChangeHandler(e) {
-  if (e.key === ",") {
-    console.log(e.target.value);
-  }
-}
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Create a Team
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group id="team-name">
-            <Form.Label>Team Name</Form.Label>
-            <Form.Control type="text" required />
-          </Form.Group>
-          <Form.Group id="members">
-            <Form.Label>Members</Form.Label>
-            <Form.Control
-              as="textarea"
-              onKeyPress={(e) => membersChangeHandler(e)}
-            />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type="submit">Create</Button>
-        </Modal.Footer>
-      </Form>
-    </Modal>
-  );
-}
-
-export default function CreateTeam() {
+export default function CreateTeam({ activeUser }) {
   const [modalShow, setModalShow] = useState(false);
+  const [allUsers, setAllUsers] = useState([]);
+  const { getAllUsers } = useAuth();
+
+  useEffect(() => {
+    const unsubscribe = getAllUsers().then((res) => setAllUsers(res));
+  }, []);
 
   return (
     <>
@@ -60,10 +20,14 @@ export default function CreateTeam() {
       >
         <AddIcon className="add-icon" />
       </div>
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+      {activeUser && (
+        <TeamsModal
+          activeUser={activeUser}
+          users={allUsers}
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
     </>
   );
 }

@@ -2,8 +2,7 @@ import React from "react";
 import { Container, Button } from "react-bootstrap";
 import logo from "../assets/images/logo.png";
 
-export default function Navbar(props) {
-  console.log(props.showButtons);
+export default function Navbar() {
   return (
     <Container className="Navbar d-flex justify-content-between align-items-center py-3">
       <a href="/" className="text-center text-md-left">
@@ -11,7 +10,7 @@ export default function Navbar(props) {
       </a>
       <div className="menu d-none d-md-flex">
         <a href="/signup">
-          <Button variant="primary" className="mr-3">
+          <Button variant="primary" className="mr-3 ">
             Sign Up
           </Button>
         </a>

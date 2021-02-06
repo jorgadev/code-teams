@@ -38,12 +38,16 @@ export function AuthProvider({ children }) {
   function insertDefaultUser(user) {
     let userObj = {
       id: user.uid,
-      avatar: "default",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/firegram-cda93.appspot.com/o/default-avatar.jpg?alt=media&token=ee4d4140-ae7d-466d-b76d-41a16f10f48c",
       memberof: [],
       projects: [],
       username: user.email.split("@")[0],
     };
     firestore.collection("users").add(userObj);
+  }
+  async function changeAvatarInDb(id) {
+    return id;
   }
 
   // Find an user from firestore by passed id
@@ -53,6 +57,12 @@ export function AuthProvider({ children }) {
       .collection("users")
       .where("id", "==", id)
       .get();
+    // Get data from each user fetched from db
+    return data.docs.map((d) => d.data());
+  }
+  // Find all users from db
+  async function getAllUsers() {
+    const data = await firestore.collection("users").get();
     // Get data from each user fetched from db
     return data.docs.map((d) => d.data());
   }
@@ -79,6 +89,8 @@ export function AuthProvider({ children }) {
     updatePassword,
     insertDefaultUser,
     getActiveUser,
+    changeAvatarInDb,
+    getAllUsers,
   };
 
   return (

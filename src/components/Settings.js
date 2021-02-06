@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import Avatar from "./Avatar";
 
-export default function Settings() {
+export default function Settings({ user }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -12,6 +12,8 @@ export default function Settings() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  console.log(user);
 
   // Change user's email
   function handleSubmit(e) {

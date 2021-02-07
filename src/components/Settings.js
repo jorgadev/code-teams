@@ -35,7 +35,7 @@ export default function Settings({ user }) {
     // Method that takes promises as an input and returns single Promise that resolves to an array of the results of the input promises
     Promise.all(promises)
       .then(() => {
-        history.push("/");
+        logout();
       })
       .catch(() => {
         setError("Failed to update account");

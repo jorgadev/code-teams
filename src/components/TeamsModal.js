@@ -94,8 +94,7 @@ export default function TeamsModal(props) {
       let teamObj = {
         creator: activeUser.id,
         name: teamName,
-        picture:
-          "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/team-icon.png?alt=media&token=28db63e9-dc55-4c9d-b41f-9cc831d1cb79",
+        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
         projects: [],
         messages: [],
         members: selectedUsers.map((user) => user.id),

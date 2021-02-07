@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
-import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function Subnavbar(props) {

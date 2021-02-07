@@ -1,13 +1,40 @@
 import React, { useEffect, useState } from "react";
-import Team from "./Team";
+import TeamSquare from "./TeamSquare";
 import CreateTeam from "./CreateTeam";
-import { useAuth } from "../contexts/AuthContext";
+import Team from "./Team";
+
+import { useAuth, AuthProvider } from "../contexts/AuthContext";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function Teams({ activeUser }) {
   const [userTeams, setUserTeams] = useState([]);
   const { getTeams } = useAuth();
 
-  //On component first time render get all users and save them in array "allUsers"
+  const TeamsIndex = () => {
+    return (
+      <div className="Teams">
+        <h3>Teams</h3>
+        <hr />
+        {activeUser && (
+          <div className="d-flex align-items-center flex-wrap">
+            {userTeams &&
+              userTeams.map((team) => (
+                <>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to={`/teams/${team.id}`}
+                  >
+                    <TeamSquare key={team.id} team={team} />
+                  </Link>
+                </>
+              ))}
+            <CreateTeam activeUser={activeUser} setUserTeams={setUserTeams} />
+          </div>
+        )}
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (activeUser) {
       getTeams(activeUser).then((res) => setUserTeams(res));
@@ -15,16 +42,15 @@ export default function Teams({ activeUser }) {
   }, []);
 
   return (
-    <div className="Teams">
-      <h3>Teams</h3>
-      <hr />
-      {activeUser && (
-        <div className="d-flex align-items-center flex-wrap">
-          {userTeams &&
-            userTeams.map((team) => <Team key={team.id} team={team} />)}
-          <CreateTeam activeUser={activeUser} setUserTeams={setUserTeams} />
-        </div>
-      )}
-    </div>
+    <Router>
+      <AuthProvider>
+        <Switch>
+          <Route exact path="/teams" component={TeamsIndex} />
+          <Route path="/teams/:team">
+            <Team />
+          </Route>
+        </Switch>
+      </AuthProvider>
+    </Router>
   );
 }

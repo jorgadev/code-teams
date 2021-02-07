@@ -92,6 +92,17 @@ export function AuthProvider({ children }) {
     firestore.collection("teams").doc(id).delete();
   }
 
+  // Find an team from firestore by passed id
+  async function getTeamById(id) {
+    // Wait for data to be fetched (search for users with same id)
+    const data = await firestore
+      .collection("teams")
+      .where("id", "==", id)
+      .get();
+    // Get data from each user fetched from db
+    return data.docs.map((d) => d.data());
+  }
+
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -119,6 +130,7 @@ export function AuthProvider({ children }) {
     createNewTeam,
     getTeams,
     deleteTeamFromDb,
+    getTeamById,
   };
 
   return (

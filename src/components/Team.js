@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
-export default function Team(props) {
-  return (
-    <div className="Team d-flex flex-column justify-content-center align-items-center mr-3 mt-3">
-      <img className="team-logo" src={props.team.picture} alt="Team logo" />
-      <h3 className="lead mt-3">{props.team.name}</h3>
-    </div>
-  );
+export default function Team() {
+  const teamId = window.location.href.split("/teams/")[1];
+  const [team, setTeam] = useState();
+  const { getTeamById } = useAuth();
+
+  useEffect(() => {
+    getTeamById(teamId).then((res) => setTeam(res[0]));
+  }, []);
+
+  return <div>{JSON.stringify(team)}</div>;
 }

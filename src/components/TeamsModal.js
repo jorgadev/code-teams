@@ -23,7 +23,7 @@ export default function TeamsModal(props) {
   const [teamName, setTeamName] = useState("");
   const [error, setError] = useState("");
   // Get function which creates new team from context
-  const { createNewTeam } = useAuth();
+  const { createBlankTeam, createNewTeam } = useAuth();
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
   const getSuggestions = (value) => {
@@ -83,27 +83,30 @@ export default function TeamsModal(props) {
   };
 
   // Create object which will be stored into database teams collection
-  const createTeamHandler = () => {
-    let teamObj = {
-      creator: activeUser.username,
-      name: teamName,
-      picture:
-        "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/team-icon.png?alt=media&token=28db63e9-dc55-4c9d-b41f-9cc831d1cb79",
-      projects: [],
-      members: selectedUsers,
-      id: `${teamName}-${activeUser.id}`,
-    };
-    // Don't create new team if no members added
-    if (teamObj.members.length > 1 && teamName != "") {
-      createNewTeam(teamObj);
-      props.setModalShow(false);
-      setSelectedUsers([activeUser.username]);
-    } else {
-      setError("Failed to create team");
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-    }
+  const createTeamHandler = async () => {
+    await createBlankTeam().then((res) => {
+      let teamObj = {
+        creator: activeUser.id,
+        name: teamName,
+        picture:
+          "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/team-icon.png?alt=media&token=28db63e9-dc55-4c9d-b41f-9cc831d1cb79",
+        projects: [],
+        members: selectedUsers,
+        id: res.id,
+      };
+      // Don't create new team if no members added
+      if (teamObj.members.length > 1 && teamName != "") {
+        createNewTeam(teamObj);
+        props.setModalShow(false);
+        setSelectedUsers([activeUser.username]);
+        setTeamName("");
+      } else {
+        setError("Failed to create team");
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      }
+    });
   };
 
   // Remove user from team members on badge click

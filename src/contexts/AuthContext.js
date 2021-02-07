@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
       projects: [],
       username: user.email.split("@")[0],
     };
-    firestore.collection("users").add(userObj);
+    firestore.collection("users").doc(user.uid).set(userObj);
   }
 
   // Find an user from firestore by passed id
@@ -58,15 +58,34 @@ export function AuthProvider({ children }) {
     // Get data from each user fetched from db
     return data.docs.map((d) => d.data());
   }
+
   // Find all users from db
   async function getAllUsers() {
     const data = await firestore.collection("users").get();
     // Get data from each user fetched from db
     return data.docs.map((d) => d.data());
   }
+
   // Insert new team in database
-  function createNewTeam(team) {
-    console.log(team);
+  function createBlankTeam() {
+    return firestore.collection("teams").add({});
+  }
+
+  // Find an user from firestore by passed id
+  async function getTeams(creator) {
+    console.log(creator);
+    // Wait for data to be fetched (search for users with same id)
+    const data = await firestore
+      .collection("teams")
+      .where("creator", "==", creator.username)
+      .get();
+    // Get data from each user fetched from db
+    return data.docs.map((d) => d.data());
+  }
+
+  // Function insert data into new team by passed id
+  function createNewTeam(teamObj) {
+    firestore.collection("teams").doc(teamObj.id).set(teamObj);
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
@@ -92,7 +111,9 @@ export function AuthProvider({ children }) {
     insertDefaultUser,
     getActiveUser,
     getAllUsers,
+    createBlankTeam,
     createNewTeam,
+    getTeams,
   };
 
   return (

@@ -7,8 +7,12 @@ export default function Teams({ activeUser }) {
     <div className="Teams">
       <h3>Teams</h3>
       <hr className="mb-3" />
-      <Team />
-      {activeUser && <CreateTeam activeUser={activeUser} />}
+      {activeUser && (
+        <>
+          <Team activeUser={activeUser} />
+          <CreateTeam activeUser={activeUser} />
+        </>
+      )}
     </div>
   );
 }

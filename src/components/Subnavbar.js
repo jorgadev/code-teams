@@ -5,10 +5,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function Subnavbar(props) {
-  const { currentUser } = useAuth();
   let history = useHistory();
-  let username;
 
+  // If back icon is clicked go one step back
   async function backClickHandler() {
     history.goBack();
   }

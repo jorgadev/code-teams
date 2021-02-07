@@ -4,12 +4,16 @@ import TeamsModal from "./TeamsModal";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function CreateTeam({ activeUser }) {
+  // By default don't show modal
   const [modalShow, setModalShow] = useState(false);
+  // Create an blank array where all users will be added after fetch
   const [allUsers, setAllUsers] = useState([]);
+  // Function from context that returns all users from database
   const { getAllUsers } = useAuth();
 
+  // On component first time render get all users and save them in array "allUsers"
   useEffect(() => {
-    const unsubscribe = getAllUsers().then((res) => setAllUsers(res));
+    getAllUsers().then((res) => setAllUsers(res));
   }, []);
 
   return (
@@ -26,6 +30,7 @@ export default function CreateTeam({ activeUser }) {
           users={allUsers}
           show={modalShow}
           onHide={() => setModalShow(false)}
+          setModalShow={setModalShow}
         />
       )}
     </>

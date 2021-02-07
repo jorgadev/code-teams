@@ -1,13 +1,16 @@
 import React from "react";
 import Subnavbar from "./Subnavbar";
+
+import "../index.scss";
 import { Jumbotron, Container, Row, Col } from "react-bootstrap";
 import mockup from "../assets/images/mockup.png";
-import "../index.scss";
+
 import CodeIcon from "@material-ui/icons/Code";
 import GroupIcon from "@material-ui/icons/Group";
 import TocIcon from "@material-ui/icons/Toc";
 import Navbar from "./Navbar";
 
+// Landing page, on exact "/" route
 export default function LandingPage() {
   return (
     <>

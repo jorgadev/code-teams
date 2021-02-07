@@ -35,19 +35,17 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
+  // Insert default user on signup
   function insertDefaultUser(user) {
     let userObj = {
       id: user.uid,
       avatar:
-        "https://firebasestorage.googleapis.com/v0/b/firegram-cda93.appspot.com/o/default-avatar.jpg?alt=media&token=ee4d4140-ae7d-466d-b76d-41a16f10f48c",
+        "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/default-avatar.jpg?alt=media&token=71dff050-cf42-439a-9902-d01b1564a14b",
       memberof: [],
       projects: [],
       username: user.email.split("@")[0],
     };
     firestore.collection("users").add(userObj);
-  }
-  async function changeAvatarInDb(id) {
-    return id;
   }
 
   // Find an user from firestore by passed id
@@ -65,6 +63,10 @@ export function AuthProvider({ children }) {
     const data = await firestore.collection("users").get();
     // Get data from each user fetched from db
     return data.docs.map((d) => d.data());
+  }
+  // Insert new team in database
+  function createNewTeam(team) {
+    console.log(team);
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
@@ -89,8 +91,8 @@ export function AuthProvider({ children }) {
     updatePassword,
     insertDefaultUser,
     getActiveUser,
-    changeAvatarInDb,
     getAllUsers,
+    createNewTeam,
   };
 
   return (

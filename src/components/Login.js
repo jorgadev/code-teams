@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory, Redirect } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
 import Navbar from "./Navbar";
 
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Link, useHistory, Redirect } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
 export default function Login() {
+  // Create refs for email and password and implement currentUser and login from context
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login, currentUser } = useAuth();
@@ -13,6 +15,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
+  // If current user is recognized, automatically redirec to dashboard (skip login/signup)
   if (currentUser) {
     return <Redirect to={"/dashboard"} />;
   }
@@ -24,12 +27,13 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
+
+      // Wait for user to be logged in an redirect him to dashboard
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/dashboard");
     } catch {
       setError("Failed to log in");
     }
-
     setLoading(false);
   }
 

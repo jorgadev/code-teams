@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import Avatar from "react-avatar-edit";
-import { useAuth } from "../contexts/AuthContext";
 
 import defaultAvatar from "../assets/images/default-avatar.jpg";
 
@@ -10,8 +9,6 @@ export default function App() {
   const [preview, setPreview] = useState(null);
   const [changeDisplay, setChangeDisplay] = useState("d-none");
   const [avatarDisplay, setAvatarDisplay] = useState("d-flex");
-
-  const { changeAvatarInDb } = useAuth();
 
   function onClose() {
     setPreview(null);

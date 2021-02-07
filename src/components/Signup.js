@@ -1,20 +1,22 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, Redirect, useHistory } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
 import Navbar from "./Navbar";
+
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup, currentUser, insertDefaultUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  // If there is user logged, automatically redirect to /dashboard
+  const { signup, currentUser, insertDefaultUser } = useAuth();
+
+  // If current user is recognized automatically redirect to /dashboard
   if (currentUser) {
     return <Redirect to={"/dashboard"} />;
   }

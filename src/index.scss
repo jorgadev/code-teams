@@ -171,6 +171,12 @@ ul {
 }
 
 .TeamsModal {
+  .user-badge {
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+  }
+
   .members-form-group {
     ul {
       margin: 0;

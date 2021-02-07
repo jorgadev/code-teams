@@ -8,12 +8,10 @@ import Autosuggest from "react-autosuggest";
 export default function TeamsModal(props) {
   // Members are all users from database (needed for suggestions)
   const members = props.users;
-  // Get just members usernames
-  const usernames = members.map((member) => member.username);
   // User that is now logged in and will be creator of team
   const activeUser = props.activeUser;
   // Array where all clicked suggestions (members of team) will be stored while creating
-  const [selectedUsers, setSelectedUsers] = useState([activeUser.username]);
+  const [selectedUsers, setSelectedUsers] = useState([activeUser]);
 
   // Text typed into suggestions input
   const [value, setValue] = useState("");
@@ -23,7 +21,12 @@ export default function TeamsModal(props) {
   const [teamName, setTeamName] = useState("");
   const [error, setError] = useState("");
   // Get function which creates new team from context
-  const { createBlankTeam, createNewTeam } = useAuth();
+  const {
+    createBlankTeam,
+    createNewTeam,
+    deleteTeamFromDb,
+    getTeams,
+  } = useAuth();
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
   const getSuggestions = (value) => {
@@ -53,7 +56,7 @@ export default function TeamsModal(props) {
 
   const onChange = (event, { newValue }) => {
     setValue(newValue);
-    getMembers(newValue);
+    getMembers(newValue, suggestions[0]);
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -75,9 +78,12 @@ export default function TeamsModal(props) {
   };
 
   // Check if user typed in or chosen exists and push to "selectedUsers" array
-  const getMembers = (value) => {
-    if (usernames.includes(value) && !selectedUsers.includes(value)) {
-      selectedUsers.push(value);
+  const getMembers = (value, suggestion) => {
+    if (
+      members.map((user) => user.username).includes(value) &&
+      !selectedUsers.map((user) => user.username).includes(value)
+    ) {
+      selectedUsers.push(suggestion);
       setValue("");
     }
   };
@@ -91,29 +97,31 @@ export default function TeamsModal(props) {
         picture:
           "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/team-icon.png?alt=media&token=28db63e9-dc55-4c9d-b41f-9cc831d1cb79",
         projects: [],
-        members: selectedUsers,
+        messages: [],
+        members: selectedUsers.map((user) => user.id),
         id: res.id,
       };
       // Don't create new team if no members added
       if (teamObj.members.length > 1 && teamName != "") {
         createNewTeam(teamObj);
         props.setModalShow(false);
-        setSelectedUsers([activeUser.username]);
+        setSelectedUsers([activeUser.id]);
         setTeamName("");
+        getTeams(activeUser).then((res) => props.setUserTeams(res));
       } else {
         setError("Failed to create team");
         setTimeout(() => {
           setError("");
         }, 3000);
+        deleteTeamFromDb(res.id);
       }
     });
   };
 
-  // Remove user from team members on badge click
   const removeBadge = (e) => {
-    const userToRemove = e.target.innerText;
-    if (userToRemove != activeUser.username) {
-      setSelectedUsers(selectedUsers.filter((user) => user !== userToRemove));
+    const id = e.target.id;
+    if (id != activeUser.id) {
+      setSelectedUsers(selectedUsers.filter((user) => user.id !== id));
     }
   };
 
@@ -158,14 +166,15 @@ export default function TeamsModal(props) {
             />
           </Form.Group>
           <div className="badges">
-            {selectedUsers.map((username) => (
+            {selectedUsers.map((user) => (
               <Badge
                 variant="secondary"
                 className="user-badge"
                 onClick={(e) => removeBadge(e)}
-                key={username}
+                key={user.id}
+                id={user.id}
               >
-                {username}
+                {user.username}
               </Badge>
             ))}
           </div>

@@ -3,7 +3,7 @@ import AddIcon from "@material-ui/icons/Add";
 import TeamsModal from "./TeamsModal";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function CreateTeam({ activeUser }) {
+export default function CreateTeam({ activeUser, setUserTeams }) {
   // By default don't show modal
   const [modalShow, setModalShow] = useState(false);
   // Create an blank array where all users will be added after fetch
@@ -17,7 +17,7 @@ export default function CreateTeam({ activeUser }) {
   }, []);
 
   return (
-    <>
+    <div className="mr-3 mt-3">
       <div
         className="CreateTeam d-flex justify-content-center align-items-center"
         onClick={() => setModalShow(true)}
@@ -31,8 +31,9 @@ export default function CreateTeam({ activeUser }) {
           show={modalShow}
           onHide={() => setModalShow(false)}
           setModalShow={setModalShow}
+          setUserTeams={setUserTeams}
         />
       )}
-    </>
+    </div>
   );
 }

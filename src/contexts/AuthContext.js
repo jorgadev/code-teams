@@ -73,11 +73,10 @@ export function AuthProvider({ children }) {
 
   // Find an user from firestore by passed id
   async function getTeams(creator) {
-    console.log(creator);
     // Wait for data to be fetched (search for users with same id)
     const data = await firestore
       .collection("teams")
-      .where("creator", "==", creator.username)
+      .where("members", "array-contains", creator.id)
       .get();
     // Get data from each user fetched from db
     return data.docs.map((d) => d.data());
@@ -86,6 +85,11 @@ export function AuthProvider({ children }) {
   // Function insert data into new team by passed id
   function createNewTeam(teamObj) {
     firestore.collection("teams").doc(teamObj.id).set(teamObj);
+  }
+
+  // Delete team document from db by passed id
+  function deleteTeamFromDb(id) {
+    firestore.collection("teams").doc(id).delete();
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
@@ -114,6 +118,7 @@ export function AuthProvider({ children }) {
     createBlankTeam,
     createNewTeam,
     getTeams,
+    deleteTeamFromDb,
   };
 
   return (

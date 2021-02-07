@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import React from "react";
 
-export default function Team({ activeUser }) {
-  const [userTeams, setUserTeams] = useState();
-  const { getTeams } = useAuth();
-
-  // On component first time render get all users and save them in array "allUsers"
-  // useEffect(() => {
-  //   if (activeUser) {
-  //     getTeams(activeUser).then((res) => setUserTeams(res));
-  //   }
-  // }, []);
-
-  // console.log(userTeams);
-
-  return <div className="d-inline-block">team</div>;
+export default function Team(props) {
+  return (
+    <div className="Team d-flex flex-column justify-content-center align-items-center mr-3 mt-3">
+      <img className="team-logo" src={props.team.picture} alt="Team logo" />
+      <h3 className="lead mt-3">{props.team.name}</h3>
+    </div>
+  );
 }

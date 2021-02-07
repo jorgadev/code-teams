@@ -170,6 +170,21 @@ ul {
   }
 }
 
+.Team {
+  width: 200px;
+  height: 200px;
+  border: 1px solid $darkgray;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+
+  .team-logo {
+    width: 40%;
+    text-align: center;
+  }
+}
+
 .TeamsModal {
   .user-badge {
     cursor: pointer;

@@ -19,14 +19,13 @@ export default function Teams({ activeUser }) {
           <div className="d-flex align-items-center flex-wrap">
             {userTeams &&
               userTeams.map((team) => (
-                <>
-                  <Link
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    to={`/teams/${team.id}`}
-                  >
-                    <TeamSquare key={team.id} team={team} />
-                  </Link>
-                </>
+                <Link
+                  key={team.id}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  to={`/teams/${team.id}`}
+                >
+                  <TeamSquare key={team.id} team={team} />
+                </Link>
               ))}
             <CreateTeam activeUser={activeUser} setUserTeams={setUserTeams} />
           </div>
@@ -39,7 +38,7 @@ export default function Teams({ activeUser }) {
     if (activeUser) {
       getTeams(activeUser).then((res) => setUserTeams(res));
     }
-  }, []);
+  }, [activeUser, getTeams]);
 
   return (
     <Router>

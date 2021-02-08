@@ -19,7 +19,7 @@ export default function Index() {
   // On first component render with "getActiveUser" function find logged in user by passing his id ([0] is just if it returns more than one)
   useEffect(() => {
     getActiveUser(currentUser.uid).then((res) => setActiveUser(res[0]));
-  }, [currentUser]);
+  }, [currentUser, getActiveUser]);
 
   // Render components on index page just if activeUser is fetched and created
   // With react routers create routes for every view on page

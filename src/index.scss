@@ -49,6 +49,7 @@ ul {
 
 .Subnavbar {
   height: 35px;
+
   .back-icon {
     cursor: pointer;
   }
@@ -218,5 +219,20 @@ ul {
         }
       }
     }
+  }
+}
+
+.Chat {
+  .Me {
+    border-radius: 5px;
+    width: 45%;
+    background-color: $primary;
+    border: 1px solid $darkgray;
+  }
+  .Other {
+    background-color: $lightgray;
+    border-radius: 5px;
+    width: 45%;
+    border: 1px solid $darkgray;
   }
 }

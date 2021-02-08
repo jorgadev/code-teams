@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 import { Modal, Button, Form, Badge, Alert } from "react-bootstrap";
@@ -101,7 +101,7 @@ export default function TeamsModal(props) {
         id: res.id,
       };
       // Don't create new team if no members added
-      if (teamObj.members.length > 1 && teamName != "") {
+      if (teamObj.members.length > 1 && teamName !== "") {
         createNewTeam(teamObj);
         props.setModalShow(false);
         setSelectedUsers([activeUser.id]);

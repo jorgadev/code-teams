@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Chat from "./Chat";
 import { useAuth } from "../contexts/AuthContext";
 
 import { Tabs, Tab } from "react-bootstrap";
@@ -22,7 +23,7 @@ export default function Team() {
           onSelect={(k) => setKey(k)}
         >
           <Tab eventKey="home" title="Chat">
-            <p>chat</p>
+            <Chat team={team} />
           </Tab>
           <Tab eventKey="profile" title="Projects">
             <p>projects</p>

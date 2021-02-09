@@ -103,13 +103,22 @@ export function AuthProvider({ children }) {
     return data.docs.map((d) => d.data());
   }
 
+  function insertNewAvatar(id, url) {
+    firestore.collection("users").doc(id).set(
+      {
+        avatar: url,
+      },
+      { merge: true }
+    );
+    return "kurac";
+  }
+
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       setLoading(false);
     });
-
     return unsubscribe;
   }, []);
 
@@ -131,6 +140,7 @@ export function AuthProvider({ children }) {
     getTeams,
     deleteTeamFromDb,
     getTeamById,
+    insertNewAvatar,
   };
 
   return (

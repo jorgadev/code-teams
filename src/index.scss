@@ -122,6 +122,43 @@ ul {
   .settings-wrapper {
     min-width: 380px;
   }
+
+  .Avatar {
+    .avatar-wrapper {
+      position: relative;
+      cursor: pointer;
+
+      input {
+        height: 0;
+        width: 0;
+        opacity: 0;
+      }
+    }
+    .avatar-overlay {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      position: absolute;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      z-index: 1;
+    }
+    .avatar-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 1px solid $lightgray;
+    }
+
+    /* progress bar styles */
+    .progress-bar {
+      height: 5px;
+      background: $primary;
+      margin-top: 20px;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {

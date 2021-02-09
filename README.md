@@ -15,6 +15,7 @@ npm install
 - can't load more than 25 messages
 - chat, teams and settings are not responsive on mobile screen
 - add teams button not responsive on md-sreens
+- email changes but username don't (must change both)
 
 ## License
 

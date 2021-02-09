@@ -44,7 +44,7 @@ export default function Index() {
                     <Projects />
                   </Route>
                   <Route path="/settings">
-                    <Settings user={activeUser} />
+                    <Settings activeUser={activeUser} />
                   </Route>
                 </Switch>
               </div>

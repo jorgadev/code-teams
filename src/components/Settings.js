@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
+import Avatar from "./Avatar";
+
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
-import Avatar from "./Avatar";
 
-export default function Settings({ user }) {
+export default function Settings({ activeUser }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -12,8 +13,6 @@ export default function Settings({ user }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
-  console.log(user);
 
   // Change user's email
   function handleSubmit(e) {

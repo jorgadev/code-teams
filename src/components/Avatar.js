@@ -1,78 +1,57 @@
-import React, { useState } from "react";
-import { Button, Row, Col } from "react-bootstrap";
-import Avatar from "react-avatar-edit";
+import React, { useState, useEffect } from "react";
+import CreateIcon from "@material-ui/icons/Create";
+import ProgressBar from "./ProgressBar";
+import { useAuth } from "../contexts/AuthContext";
 
-import defaultAvatar from "../assets/images/default-avatar.jpg";
+export default function Avatar() {
+  const [overlay, setOverlay] = useState("d-none");
+  const [file, setFile] = useState(null);
+  const types = ["image/png", "image/jpeg"];
+  const [activeUser, setActiveUser] = useState();
+  const { currentUser, getActiveUser } = useAuth();
 
-export default function App() {
-  const [src, setSrc] = useState(defaultAvatar);
-  const [preview, setPreview] = useState(null);
-  const [changeDisplay, setChangeDisplay] = useState("d-none");
-  const [avatarDisplay, setAvatarDisplay] = useState("d-flex");
+  useEffect(() => {
+    getActiveUser(currentUser.uid).then((res) => setActiveUser(res[0]));
+  }, [file]);
 
-  function onClose() {
-    setPreview(null);
-  }
-
-  function onCrop(preview) {
-    setPreview(preview);
-  }
-
-  function onBeforeFileLoad(elem) {
-    if (elem.target.files[0].size > 71680) {
-      alert("File is too big!");
-      elem.target.value = "";
+  const changeAvatarHandler = (e) => {
+    let selected = e.target.files[0];
+    if (selected && types.includes(selected.type)) {
+      setFile(selected);
+      //setError("");
+    } else {
+      setFile(null);
+      //setError("Please select an image file (png or jpeg).");
     }
-  }
-
-  function showEditor() {
-    setChangeDisplay("d-flex");
-    setAvatarDisplay("d-none");
-  }
-  function showAvatar() {
-    setChangeDisplay("d-none");
-    setAvatarDisplay("d-flex");
-  }
-  function saveAvatar() {
-    setSrc(preview);
-    showAvatar();
-  }
+  };
 
   return (
-    <Row className="text-center Avatar">
-      <Col
-        className={`${changeDisplay} flex-column justify-content-center align-items-center`}
-      >
-        <Avatar
-          width={150}
-          height={150}
-          cropRadius={70}
-          onCrop={onCrop}
-          onClose={onClose}
-          onBeforeFileLoad={onBeforeFileLoad}
-          src={src}
-        />
-        <div className="d-flex mt-2">
-          <Button onClick={saveAvatar} className="mx-1">
-            Save
-          </Button>
-          <Button onClick={showAvatar} className="bg-danger mx-1">
-            Cancel
-          </Button>
+    <>
+      {activeUser && (
+        <div className="Avatar d-flex justify-content-center align-items-center flex-column">
+          <form>
+            <label
+              className="avatar-wrapper"
+              onMouseEnter={() => setOverlay("d-flex")}
+              onMouseLeave={() => setOverlay("d-none")}
+            >
+              <div className={`avatar-overlay ${overlay}`}>
+                <input type="file" onChange={changeAvatarHandler} />
+                <CreateIcon />
+              </div>
+              <img className="avatar-pic" src={activeUser.avatar} />
+            </label>
+          </form>
+          <p className="lead">{activeUser.username}</p>
+          {file && (
+            <ProgressBar
+              file={file}
+              setFile={setFile}
+              activeUser={activeUser}
+            />
+          )}
         </div>
-      </Col>
-      <Col
-        className={`${avatarDisplay} flex-column justify-content-center align-items-center`}
-      >
-        <img
-          src={!src ? defaultAvatar : src}
-          alt="Preview"
-          className="avatar-preview"
-        />
-        <Button onClick={showEditor} className="mt-2">
-          Change
-        </Button>
-      </Col>
-    </Row>
+      )}
+    </>
   );
 }

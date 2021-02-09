@@ -16,7 +16,7 @@ export default function Teams({ activeUser }) {
         <h3>Teams</h3>
         <hr />
         {activeUser && (
-          <div className="d-flex align-items-center flex-wrap">
+          <div className="d-flex justify-content-center justify-content-md-start align-items-center flex-wrap">
             {userTeams &&
               userTeams.map((team) => (
                 <Link

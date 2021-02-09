@@ -13,10 +13,11 @@ export default function Chat({ team, activeUser }) {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  // getting the message and sorting them by time of creation
+  // getting the messages and sorting them depending on creation time
   const messagesRef = firestore.collection("messages");
   const query = messagesRef
     .where("team", ">=", team.id)
+    .where("team", "<=", team.id)
     .orderBy("team", "asc")
     .orderBy("createdAt", "desc")
     .limit(25);
@@ -61,7 +62,7 @@ export default function Chat({ team, activeUser }) {
           <Form.Control
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
-            placeholder="Say something"
+            placeholder="Say something.."
           />
           <Button type="submit" disabled={!formValue} className="px-3">
             Send
@@ -71,8 +72,3 @@ export default function Chat({ team, activeUser }) {
     </div>
   );
 }
-
-// messages: [
-//   {user: "id1", content: "first message", date: new Date()},
-//   {user: "id2", content: "second message", date: new Date()}
-// ]

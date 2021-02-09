@@ -4,7 +4,7 @@ Code Teams is application for organizing coding jobs inside company
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install foobar.
+Use the package manager [npm](https://www.npmjs.com/) to install a project.
 
 ```bash
 npm install
@@ -14,6 +14,7 @@ npm install
 
 - can't load more than 25 messages
 - chat, teams and settings are not responsive on mobile screen
+- add teams button not responsive on md-sreens
 
 ## License
 

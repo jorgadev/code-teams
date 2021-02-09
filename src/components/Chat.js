@@ -30,8 +30,6 @@ export default function Chat({ team, activeUser }) {
     // gets name, userID and pfp of logged in user
     const { uid } = auth.currentUser;
 
-    console.log(auth.currentUser);
-
     await messagesRef.add({
       body: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -46,7 +44,7 @@ export default function Chat({ team, activeUser }) {
 
   return (
     <div className="Chat">
-      <div>
+      <div className="px-3">
         {/* we will loop over the message and return a
         ChatMessage component for each message */}
         {messages &&
@@ -57,18 +55,20 @@ export default function Chat({ team, activeUser }) {
       </div>
 
       {/* Form to type and submit messages */}
-      <Form onSubmit={sendMessage} className="mt-5">
-        <Form.Group className="d-flex">
-          <Form.Control
-            value={formValue}
-            onChange={(e) => setFormValue(e.target.value)}
-            placeholder="Say something.."
-          />
-          <Button type="submit" disabled={!formValue} className="px-3">
-            Send
-          </Button>
-        </Form.Group>
-      </Form>
+      <div className="form-wrapper">
+        <Form onSubmit={sendMessage}>
+          <Form.Group className="d-flex">
+            <Form.Control
+              value={formValue}
+              onChange={(e) => setFormValue(e.target.value)}
+              placeholder="Say something.."
+            />
+            <Button type="submit" disabled={!formValue} className="px-3">
+              Send
+            </Button>
+          </Form.Group>
+        </Form>
+      </div>
     </div>
   );
 }

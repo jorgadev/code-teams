@@ -16,6 +16,7 @@ npm install
 - chat, teams and settings are not responsive on mobile screen
 - add teams button not responsive on md-sreens
 - email changes but username don't (must change both)
+- when typing a message, whole page re-renders
 
 ## License
 

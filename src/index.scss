@@ -1,6 +1,6 @@
 $primary: #00a4ef;
 $secondary: #00306c;
-$lightgray: #e5e5e5;
+$lightgray: #f0f0f0;
 $darkgray: #cecece;
 $darkblue: #002656;
 
@@ -161,40 +161,6 @@ ul {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .LandingPage {
-    .sub-message,
-    .footer {
-      font-size: 0.9rem;
-    }
-  }
-
-  .Sidebar {
-    position: fixed;
-    bottom: 0;
-    height: auto;
-    width: 100%;
-    z-index: 1;
-
-    .wrapper {
-      flex-direction: row !important;
-      justify-content: space-around;
-
-      .settings-icon {
-        position: relative !important;
-      }
-    }
-  }
-  .Settings {
-    .settings-wrapper {
-      padding-bottom: 50px;
-    }
-  }
-  .Chat {
-    margin-bottom: 72px;
-  }
-}
-
 .CreateTeam {
   width: 200px;
   height: 200px;
@@ -263,16 +229,75 @@ ul {
 }
 
 .Chat {
+  position: relative;
   .Me {
     border-radius: 5px;
-    width: 45%;
+    width: fit-content;
     background-color: $primary;
     border: 1px solid $darkgray;
+    max-width: 50%;
+    word-break: break-all;
   }
   .Other {
-    background-color: $lightgray;
+    background-color: white;
     border-radius: 5px;
-    width: 45%;
+    width: fit-content;
     border: 1px solid $darkgray;
+    max-width: 50%;
+    word-break: break-all;
+  }
+  .form-wrapper {
+    position: sticky;
+    padding: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border: 1px solid $lightgray;
+    border-radius: 5px;
+  }
+}
+
+.tab-content {
+  background-color: $lightgray;
+  height: calc(100vh - 200px);
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------- media queries --------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .LandingPage {
+    .sub-message,
+    .footer {
+      font-size: 0.9rem;
+    }
+  }
+
+  .Sidebar {
+    position: fixed;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    z-index: 1;
+
+    .wrapper {
+      flex-direction: row !important;
+      justify-content: space-around;
+
+      .settings-icon {
+        position: relative !important;
+      }
+    }
+  }
+  .Settings {
+    .settings-wrapper {
+      padding-bottom: 50px;
+    }
+  }
+  .Chat {
+    margin-bottom: 72px;
   }
 }

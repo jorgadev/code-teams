@@ -11,6 +11,26 @@ $darkblue: #002656;
 
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.member-container {
+  border: 1px solid $darkgray;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  &:hover {
+    cursor: pointer;
+    background-color: $lightgray;
+  }
+
+  .member-avatar {
+    width: 50px;
+    border: 1px solid $lightgray;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
 }
 
 .LandingPage {
@@ -228,6 +248,19 @@ ul {
   }
 }
 
+.tab-content {
+  background-color: $lightgray;
+  height: calc(100vh - 200px);
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  #controlled-tab-example-tabpane-contact {
+    height: 100%;
+  }
+}
+
 .Chat {
   position: relative;
   .Me {
@@ -258,12 +291,22 @@ ul {
   }
 }
 
-.tab-content {
-  background-color: $lightgray;
-  height: calc(100vh - 200px);
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
+.TeamSettings {
+  height: 100%;
+  width: 100%;
+
+  .settings-sidebar {
+    width: 300px;
+    background-color: white;
+    height: 100%;
+
+    .team-logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      border-radius: 50%;
+      font-size: 24px;
+    }
   }
 }
 

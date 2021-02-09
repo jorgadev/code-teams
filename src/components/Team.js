@@ -5,7 +5,7 @@ import TeamSettings from "./TeamSettings";
 
 import { Tabs, Tab } from "react-bootstrap";
 
-export default function Team() {
+export default function Team({ activeUser }) {
   const teamId = window.location.href.split("/teams/")[1];
   const [team, setTeam] = useState();
   const { getTeamById } = useAuth();
@@ -17,7 +17,7 @@ export default function Team() {
 
   return (
     <>
-      {team && (
+      {team && activeUser && (
         <Tabs
           id="controlled-tab-example"
           activeKey={key}
@@ -29,9 +29,11 @@ export default function Team() {
           <Tab eventKey="profile" title="Projects">
             <p>projects</p>
           </Tab>
-          <Tab eventKey="contact" title="Settings">
-            <TeamSettings team={team} />
-          </Tab>
+          {activeUser.id === team.creator ? (
+            <Tab eventKey="contact" title="Settings">
+              <TeamSettings team={team} />
+            </Tab>
+          ) : null}
         </Tabs>
       )}
     </>

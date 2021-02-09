@@ -17,6 +17,7 @@ npm install
 - add teams button not responsive on md-sreens
 - email changes but username don't (must change both)
 - when typing a message, whole page re-renders
+- a litle padding/margin in team (heigh too big or something)
 
 ## License
 

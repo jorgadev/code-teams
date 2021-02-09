@@ -46,7 +46,7 @@ export default function Teams({ activeUser }) {
         <Switch>
           <Route exact path="/teams" component={TeamsIndex} />
           <Route path="/teams/:team">
-            <Team />
+            <Team activeUser={activeUser} />
           </Route>
         </Switch>
       </AuthProvider>

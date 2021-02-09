@@ -25,7 +25,9 @@ export default function LandingPage() {
               className="left-column d-flex flex-column justify-content-center text-center text-lg-left"
             >
               <h1 className="text-primary">Be a Leader!</h1>
-              <h3 className="font-weight-light">More ways to lead a team.</h3>
+              <h3 className="font-weight-light">
+                More ways to lead your team.
+              </h3>
               <div className="mt-3 mt-lg-5">
                 <a href="/signup" className="px-5 btn btn-primary">
                   Sign Up

@@ -10,7 +10,9 @@ export default function TeamSquare(props) {
       >
         {props.team.name.slice(0, 2).toUpperCase()}
       </div>
-      <h3 className="lead mt-3">{props.team.name}</h3>
+      <h3 className="lead mt-3 team-name text-center px-2">
+        {props.team.name}
+      </h3>
     </div>
   );
 }

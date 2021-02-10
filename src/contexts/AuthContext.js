@@ -41,8 +41,6 @@ export function AuthProvider({ children }) {
       id: user.uid,
       avatar:
         "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/default-avatar.jpg?alt=media&token=71dff050-cf42-439a-9902-d01b1564a14b",
-      memberof: [],
-      projects: [],
       username: user.email.split("@")[0],
     };
     firestore.collection("users").doc(user.uid).set(userObj);
@@ -103,10 +101,22 @@ export function AuthProvider({ children }) {
     return data.docs.map((d) => d.data());
   }
 
+  // Insert new user avatar
   function insertNewAvatar(id, url) {
     firestore.collection("users").doc(id).set(
       {
         avatar: url,
+      },
+      { merge: true }
+    );
+  }
+
+  // Delete user from team
+  async function removeUserFromTeam(teamId, filteredArray) {
+    console.log(teamId, filteredArray);
+    firestore.collection("teams").doc(teamId).set(
+      {
+        members: filteredArray,
       },
       { merge: true }
     );
@@ -141,6 +151,7 @@ export function AuthProvider({ children }) {
     deleteTeamFromDb,
     getTeamById,
     insertNewAvatar,
+    removeUserFromTeam,
   };
 
   return (

@@ -38,9 +38,11 @@ ul {
     top: 5px !important;
     right: 5px !important;
     color: $darkgray;
+    display: block;
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
+      color: #a0a1a1;
     }
   }
 }
@@ -224,6 +226,9 @@ ul {
     margin: 0 auto;
     border-radius: 50%;
     font-size: 24px;
+  }
+  .team-name {
+    word-break: break-all;
   }
 }
 

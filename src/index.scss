@@ -310,6 +310,13 @@ ul {
       }
     }
 
+    .suggestion {
+      &:hover {
+        cursor: pointer;
+        background-color: $lightgray;
+      }
+    }
+
     .team-logo {
       width: 60px;
       height: 60px;

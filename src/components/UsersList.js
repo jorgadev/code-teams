@@ -31,22 +31,16 @@ export default function AutoSuggestInput({ team }) {
       {members &&
         members.map((member) => {
           return (
-            <>
-              <div className="member-container">
-                <img
-                  className="member-avatar"
-                  src={member.avatar}
-                  alt="Avatar"
+            <div className="member-container" key={member.id}>
+              <img className="member-avatar" src={member.avatar} alt="Avatar" />
+              <p>{member.username}</p>
+              {member.id !== team.creator ? (
+                <ClearIcon
+                  className="remove-user"
+                  onClick={() => removeUserHandler(member.id)}
                 />
-                <p>{member.username}</p>
-                {member.id !== team.creator ? (
-                  <ClearIcon
-                    className="remove-user"
-                    onClick={() => removeUserHandler(member.id)}
-                  />
-                ) : null}
-              </div>
-            </>
+              ) : null}
+            </div>
           );
         })}
     </>

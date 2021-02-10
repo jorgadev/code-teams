@@ -123,6 +123,18 @@ export function AuthProvider({ children }) {
     return "kurac";
   }
 
+  // Add user to team
+  async function addUserToTeam(teamId, filteredArray) {
+    console.log(teamId, filteredArray);
+    firestore.collection("teams").doc(teamId).set(
+      {
+        members: filteredArray,
+      },
+      { merge: true }
+    );
+    return "kurac";
+  }
+
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -152,6 +164,7 @@ export function AuthProvider({ children }) {
     getTeamById,
     insertNewAvatar,
     removeUserFromTeam,
+    addUserToTeam,
   };
 
   return (

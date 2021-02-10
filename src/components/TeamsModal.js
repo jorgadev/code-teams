@@ -101,7 +101,12 @@ export default function TeamsModal(props) {
         id: res.id,
       };
       // Don't create new team if no members added
-      if (teamObj.members.length > 1 && teamName !== "") {
+      if (
+        teamObj.members.length > 1 &&
+        teamName !== "" &&
+        teamName.length > 1 &&
+        teamName.length < 20
+      ) {
         createNewTeam(teamObj);
         props.setModalShow(false);
         setSelectedUsers([activeUser.id]);

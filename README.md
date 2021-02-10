@@ -19,6 +19,8 @@ npm install
 - when typing a message, whole page re-renders
 - ~~a litle padding/margin in team (heigh too big or something)~~
 - loop through usernames when adding user is not proper way cuz username can be changed
+- fetching messages too often (doesn't behave fine when deployed)
+- limit team name to 20 characters
 
 ## License
 

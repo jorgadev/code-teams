@@ -14,16 +14,6 @@ export default function AutoSuggestInput({ team }) {
     getAllUsers().then((res) => setAllUsers(res));
   }, []);
 
-  // useEffect(() => {
-  //   Promise.all(
-  //     team.members.map((memberId) =>
-  //       getActiveUser(memberId).then((res) => res[0])
-  //     )
-  //   ).then((members) => setMembers(members));
-  // }, [team]);
-
-  // console.log(members);
-
   // Text typed into suggestions input
   const [value, setValue] = useState("");
   // All suggestions - usernames from database

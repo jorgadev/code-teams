@@ -1,5 +1,6 @@
 import React from "react";
 import AutoSuggestInput from "./AutoSuggestInput";
+import UsersList from "./UsersList";
 
 export default function TeamSettings({ team }) {
   return (
@@ -17,6 +18,9 @@ export default function TeamSettings({ team }) {
             <h3 className="text-center lead mt-3">{team.name}</h3>
             <hr className="my-3" />
             <AutoSuggestInput team={team} />
+            <hr className="my-3" />
+            <h3>Participants:</h3>
+            <UsersList team={team} />
           </div>
           <div className="settings-main"></div>
         </div>

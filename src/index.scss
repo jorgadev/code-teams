@@ -24,12 +24,24 @@ ul {
     cursor: pointer;
     background-color: $lightgray;
   }
+  position: relative;
 
   .member-avatar {
     width: 50px;
+    height: 50px;
     border: 1px solid $lightgray;
     margin-right: 10px;
     vertical-align: middle;
+  }
+  .remove-user {
+    position: absolute !important;
+    top: 5px !important;
+    right: 5px !important;
+    color: $darkgray;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
   }
 }
 
@@ -226,31 +238,13 @@ ul {
     ul {
       margin: 0;
       padding: 0;
-
-      .member-container {
-        border: 1px solid $darkgray;
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
-        &:hover {
-          cursor: pointer;
-          background-color: $lightgray;
-        }
-
-        .member-avatar {
-          width: 50px;
-          border: 1px solid $lightgray;
-          margin-right: 10px;
-          vertical-align: middle;
-        }
-      }
     }
   }
 }
 
 .tab-content {
   background-color: $lightgray;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 203px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -299,6 +293,17 @@ ul {
     width: 300px;
     background-color: white;
     height: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .member-container {
+      &:hover {
+        background-color: white;
+        cursor: default;
+      }
+    }
 
     .team-logo {
       width: 60px;

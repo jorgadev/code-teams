@@ -17,7 +17,9 @@ export default function AddUser({ team }) {
 
   const addUserHandler = async (id) => {
     const newArray = members.map((member) => member.id);
-    newArray.push(id);
+    if (!newArray.includes(id)) {
+      newArray.push(id);
+    }
     await addUserToTeam(team.id, newArray).then(() => {});
   };
 

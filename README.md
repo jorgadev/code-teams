@@ -10,7 +10,7 @@ Use the package manager [npm](https://www.npmjs.com/) to install a project.
 npm install
 ```
 
-## Bugs
+## Fix these
 
 - can't load more than 25 messages
 - chat, teams and settings are not responsive on mobile screen
@@ -21,6 +21,7 @@ npm install
 - loop through usernames when adding user is not proper way cuz username can be changed
 - fetching messages too often (doesn't behave fine when deployed)
 - limit team name to 20 characters
+- add timestamp to chat messages
 
 ## License
 

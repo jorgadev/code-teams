@@ -14,6 +14,9 @@ export default function CreateTeam({ activeUser, setUserTeams }) {
   // On component first time render get all users and save them in array "allUsers"
   useEffect(() => {
     getAllUsers().then((res) => setAllUsers(res));
+    return () => {
+      setAllUsers(null);
+    };
   }, []);
 
   return (

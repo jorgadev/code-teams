@@ -7,7 +7,7 @@ export default function TeamSettings({ team }) {
     <>
       {team && (
         <div className="TeamSettings">
-          <div className="settings-sidebar px-3 pt-5">
+          <div className="settings-sidebar px-3 py-5">
             <div
               className="team-logo d-flex justify-content-center align-items-center text-white font-weight-light"
               style={{ backgroundColor: team.color }}

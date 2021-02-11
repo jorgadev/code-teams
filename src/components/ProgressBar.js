@@ -11,7 +11,7 @@ const ProgressBar = ({ file, setFile, activeUser }) => {
       setFile(null);
       insertNewAvatar(activeUser.id, url);
     }
-  }, [url, setFile]);
+  }, [url, setFile, activeUser.id, insertNewAvatar]);
 
   return <div className="progress-bar" style={{ width: progress + "%" }}></div>;
 };

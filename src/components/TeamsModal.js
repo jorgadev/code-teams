@@ -47,16 +47,26 @@ export default function TeamsModal(props) {
   const getSuggestionValue = (suggestion) => suggestion.username;
 
   // Render suggestions into divs
-  const renderSuggestion = (suggestion) => (
-    <div className="member-container">
-      <img className="member-avatar" src={suggestion.avatar} alt="Avatar" />
-      <p>{suggestion.username}</p>
-    </div>
-  );
+  const renderSuggestion = (suggestion) => {
+    if (!selectedUsers.map((user) => user.id).includes(suggestion.id)) {
+      return (
+        <div
+          className="member-container"
+          onClick={() => setValue(suggestion.username)}
+        >
+          <img className="member-avatar" src={suggestion.avatar} alt="Avatar" />
+          <p>{suggestion.username}</p>
+        </div>
+      );
+    }
+  };
 
   const onChange = (event, { newValue }) => {
     setValue(newValue);
-    getMembers(newValue, suggestions[0]);
+    getMembers(
+      newValue,
+      suggestions.filter((suggestion) => suggestion.username === newValue)[0]
+    );
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -124,7 +134,7 @@ export default function TeamsModal(props) {
 
   const removeBadge = (e) => {
     const id = e.target.id;
-    if (id != activeUser.id) {
+    if (id !== activeUser.id) {
       setSelectedUsers(selectedUsers.filter((user) => user.id !== id));
     }
   };

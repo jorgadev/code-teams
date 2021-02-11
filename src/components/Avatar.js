@@ -12,7 +12,7 @@ export default function Avatar() {
 
   useEffect(() => {
     getActiveUser(currentUser.uid).then((res) => setActiveUser(res[0]));
-  }, [file]);
+  }, [file, currentUser.uid, getActiveUser]);
 
   const changeAvatarHandler = (e) => {
     let selected = e.target.files[0];

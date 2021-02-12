@@ -23,6 +23,14 @@ npm install
 - limit team name to 20 characters
 - add timestamp to chat messages
 
+## Todos
+
+- delete team
+- leave team
+- create project
+- show project on projects view
+- show project on team projects tab
+
 ## License
 
 jorgec terminator

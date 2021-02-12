@@ -7,8 +7,14 @@ import { useAuth, AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function Teams({ activeUser }) {
-  const [userTeams, setUserTeams] = useState([]);
+  const [userTeams, setUserTeams] = useState(null);
   const { getTeams } = useAuth();
+
+  useEffect(() => {
+    if (activeUser) {
+      getTeams(activeUser).then((res) => setUserTeams(res));
+    }
+  }, []);
 
   const TeamsIndex = () => {
     return (
@@ -33,12 +39,6 @@ export default function Teams({ activeUser }) {
       </div>
     );
   };
-
-  useEffect(() => {
-    if (activeUser) {
-      getTeams(activeUser).then((res) => setUserTeams(res));
-    }
-  }, [activeUser, getTeams]);
 
   return (
     <Router>

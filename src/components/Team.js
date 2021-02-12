@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Chat from "./Chat";
 import { useAuth } from "../contexts/AuthContext";
 import TeamSettings from "./TeamSettings";
+import TeamProjects from "./TeamProjects";
 
 import { Tabs, Tab } from "react-bootstrap";
 
@@ -27,7 +28,7 @@ export default function Team({ activeUser }) {
             <Chat team={team} />
           </Tab>
           <Tab eventKey="profile" title="Projects">
-            <p>projects</p>
+            <TeamProjects team={team} activeUser={activeUser} />
           </Tab>
           {activeUser.id === team.creator ? (
             <Tab eventKey="contact" title="Settings">

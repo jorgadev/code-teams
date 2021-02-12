@@ -2,7 +2,19 @@ import React from "react";
 import AddUser from "./AddUser";
 import UsersList from "./UsersList";
 
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+
 export default function TeamSettings({ team }) {
+  const { deleteTeamFromDb } = useAuth();
+  const history = useHistory();
+
+  const deleteTeamHandler = (id) => {
+    deleteTeamFromDb(id).then(() => {
+      history.push("/dashboard");
+    });
+  };
+
   return (
     <>
       {team && (
@@ -22,7 +34,11 @@ export default function TeamSettings({ team }) {
             <h3>Participants:</h3>
             <UsersList team={team} />
           </div>
-          <div className="settings-main"></div>
+          <div className="settings-main">
+            <button onClick={() => deleteTeamHandler(team.id)}>
+              Delete team
+            </button>
+          </div>
         </div>
       )}
     </>
@@ -31,6 +47,4 @@ export default function TeamSettings({ team }) {
 
 // podesavanja:
 // - moći promijeniti ime tima
-// - moći dodati nekog člana
-// - moći izbrisati nekog (znači da mora biti lista)
 // - moči izbrisati tim

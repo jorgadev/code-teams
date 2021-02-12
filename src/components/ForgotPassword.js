@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import Subnavbar from "./Subnavbar";
+import Navbar from "./Navbar";
 
 export default function ForgotPassword() {
   const emailRef = useRef();
@@ -30,6 +31,7 @@ export default function ForgotPassword() {
 
   return (
     <>
+      <Navbar />
       <Subnavbar message={"Feel free to join us!"} />
       <div className="ForgotPassword d-flex justify-content-center align-items-center">
         <div className="w-100 card-container">

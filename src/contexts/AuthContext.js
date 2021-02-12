@@ -86,8 +86,8 @@ export function AuthProvider({ children }) {
   }
 
   // Delete team document from db by passed id
-  function deleteTeamFromDb(id) {
-    firestore.collection("teams").doc(id).delete();
+  async function deleteTeamFromDb(id) {
+    return await firestore.collection("teams").doc(id).delete();
   }
 
   // Find an team from firestore by passed id
@@ -112,27 +112,23 @@ export function AuthProvider({ children }) {
   }
 
   // Delete user from team
-  async function removeUserFromTeam(teamId, filteredArray) {
-    console.log(teamId, filteredArray);
+  function removeUserFromTeam(teamId, filteredArray) {
     firestore.collection("teams").doc(teamId).set(
       {
         members: filteredArray,
       },
       { merge: true }
     );
-    return "kurac";
   }
 
   // Add user to team
   async function addUserToTeam(teamId, filteredArray) {
-    console.log(teamId, filteredArray);
     firestore.collection("teams").doc(teamId).set(
       {
         members: filteredArray,
       },
       { merge: true }
     );
-    return "kurac";
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user

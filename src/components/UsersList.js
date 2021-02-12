@@ -13,7 +13,7 @@ export default function AutoSuggestInput({ team }) {
     const newArray = members
       .filter((member) => member.id !== id)
       .map((member) => member.id);
-    await removeUserFromTeam(team.id, newArray).then(() => {});
+    removeUserFromTeam(team.id, newArray);
   };
 
   useEffect(() => {

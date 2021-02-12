@@ -293,6 +293,7 @@ ul {
 .TeamSettings {
   height: 100%;
   width: 100%;
+  display: flex;
 
   .settings-sidebar {
     width: 300px;
@@ -323,6 +324,23 @@ ul {
       margin: 0 auto;
       border-radius: 50%;
       font-size: 24px;
+    }
+  }
+}
+
+.Modal {
+  .todo {
+    border: 1px solid $darkgray;
+    padding: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    word-break: break-all;
+    .remove-todo {
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 }

@@ -17,7 +17,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <PrivateRoute path="/dashboard" component={Index} />
-            <PrivateRoute path="/teams" component={Index} />
+            <PrivateRoute path="/teams" component={Index} forceRefres={true} />
             <PrivateRoute path="/projects" component={Index} />
             <PrivateRoute path="/settings" component={Index} />
             <Route path="/signup" component={Signup} />

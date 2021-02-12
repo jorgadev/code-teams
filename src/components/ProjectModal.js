@@ -1,24 +1,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Modal, Button, Alert, Form } from "react-bootstrap";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { useAuth } from "../contexts/AuthContext";
 
 // Modal for project add
 const ProjectModal = (props) => {
+  console.log(props);
   const [error, setError] = useState("");
   const [todos, setTodos] = useState([]);
+  const {
+    createNewProjectInDb,
+    createBlankProject,
+    deleteProjectFromDb,
+    getProjectsByTeamId,
+  } = useAuth();
   const projectNameRef = useRef();
   const textAreaRef = useRef();
 
+  useEffect(() => {
+    getProjectsByTeamId(props.team.id).then((res) => {
+      props.setProjects(res);
+    });
+  }, []);
+
   // Create new project when button create is clicked
-  const createNewProject = () => {
-    if (projectNameRef.current.value !== "" && todos.length > 0) {
-      props.setModalShow(false);
-    } else {
-      setError("Failed to create project");
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-    }
+  const createNewProject = async () => {
+    const projectName = projectNameRef.current.value;
+    await createBlankProject().then((res) => {
+      let projectObj = {
+        id: res.id,
+        team: props.team.id,
+        name: projectName,
+        completed: false,
+        todos: [],
+      };
+      if (projectName !== "") {
+        createNewProjectInDb(projectObj);
+        props.setModalShow(false);
+      } else {
+        setError("Failed to create project");
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+        deleteProjectFromDb(res.id);
+      }
+    });
   };
 
   // Add todo to array

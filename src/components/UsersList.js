@@ -17,13 +17,15 @@ export default function AutoSuggestInput({ team }) {
   };
 
   useEffect(() => {
-    getTeamById(team.id).then((res) => {
-      Promise.all(
-        res[0].members.map((memberId) =>
-          getActiveUser(memberId).then((res) => res[0])
-        )
-      ).then((members) => setMembers(members));
-    });
+    if (members !== []) {
+      getTeamById(team.id).then((res) => {
+        Promise.all(
+          res[0].members.map((memberId) =>
+            getActiveUser(memberId).then((res) => res[0])
+          )
+        ).then((members) => setMembers(members));
+      });
+    }
   }, [members]);
 
   return (

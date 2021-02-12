@@ -24,14 +24,14 @@ export default function Team({ activeUser }) {
           activeKey={key}
           onSelect={(k) => setKey(k)}
         >
-          <Tab eventKey="home" title="Chat">
+          <Tab eventKey="home" title="Chat" unmountOnExit={true}>
             <Chat team={team} />
           </Tab>
-          <Tab eventKey="profile" title="Projects">
+          <Tab eventKey="profile" title="Projects" unmountOnExit={true}>
             <TeamProjects team={team} activeUser={activeUser} />
           </Tab>
           {activeUser.id === team.creator ? (
-            <Tab eventKey="contact" title="Settings">
+            <Tab eventKey="contact" title="Settings" unmountOnExit={true}>
               <TeamSettings team={team} />
             </Tab>
           ) : null}

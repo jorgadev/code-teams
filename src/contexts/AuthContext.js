@@ -131,6 +131,32 @@ export function AuthProvider({ children }) {
     );
   }
 
+  // Create new default project in db
+  async function createNewProjectInDb(projectObj) {
+    return firestore.collection("projects").doc(projectObj.id).set(projectObj);
+  }
+
+  // Insert new blank project in database
+  function createBlankProject() {
+    return firestore.collection("projects").add({});
+  }
+
+  // Delete project doc from db by passed id
+  async function deleteProjectFromDb(id) {
+    return await firestore.collection("projects").doc(id).delete();
+  }
+
+  // Find an team from firestore by passed id
+  async function getProjectsByTeamId(id) {
+    // Wait for data to be fetched (search for users with same id)
+    const data = await firestore
+      .collection("projects")
+      .where("team", "==", id)
+      .get();
+    // Get data from each user fetched from db
+    return data.docs.map((d) => d.data());
+  }
+
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -161,6 +187,10 @@ export function AuthProvider({ children }) {
     insertNewAvatar,
     removeUserFromTeam,
     addUserToTeam,
+    createNewProjectInDb,
+    createBlankProject,
+    deleteProjectFromDb,
+    getProjectsByTeamId,
   };
 
   return (

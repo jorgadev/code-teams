@@ -105,8 +105,6 @@ export default function TeamsModal(props) {
         creator: activeUser.id,
         name: teamName,
         color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-        projects: [],
-        messages: [],
         members: selectedUsers.map((user) => user.id),
         id: res.id,
       };

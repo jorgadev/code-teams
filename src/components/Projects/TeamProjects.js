@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProjectModal from "./ProjectModal";
 import { Accordion, Card } from "react-bootstrap";
 
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function TeamProjects({ team, activeUser }) {
   const [projects, setProjects] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CreateIcon from "@material-ui/icons/Create";
 import ProgressBar from "./ProgressBar";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Avatar() {
   const [overlay, setOverlay] = useState("d-none");

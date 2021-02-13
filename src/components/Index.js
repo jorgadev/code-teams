@@ -1,9 +1,9 @@
 import Subnavbar from "./Subnavbar";
 import Sidebar from "./Sidebar";
-import Dashboard from "./Dashboard";
-import Teams from "./Teams";
-import Projects from "./Projects";
-import Settings from "./Settings";
+import Dashboard from "./Dashboard/Dashboard";
+import Teams from "./Teams/Teams";
+import Projects from "./Projects/Projects";
+import Settings from "./Settings/Settings";
 import Navbar from "./Navbar";
 
 import { useAuth } from "../contexts/AuthContext";

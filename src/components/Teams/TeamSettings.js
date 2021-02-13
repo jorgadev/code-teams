@@ -2,7 +2,7 @@ import React from "react";
 import AddUser from "./AddUser";
 import UsersList from "./UsersList";
 
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function TeamSettings({ team }) {

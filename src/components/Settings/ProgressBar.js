@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import useStorage from "../hooks/useStorage";
-import { useAuth } from "../contexts/AuthContext";
+import useStorage from "../../hooks/useStorage";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ProgressBar = ({ file, setFile, activeUser }) => {
   const { url, progress } = useStorage(file);

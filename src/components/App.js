@@ -1,9 +1,9 @@
 import React from "react";
-import Signup from "./Signup";
+import Signup from "./Auth/Signup";
 import Index from "./Index";
-import Login from "./Login";
+import Login from "./Auth/Login";
 import PrivateRoute from "./PrivateRoute";
-import ForgotPassword from "./ForgotPassword";
+import ForgotPassword from "./Auth/ForgotPassword";
 import LandingPage from "./LandingPage";
 
 import { AuthProvider } from "../contexts/AuthContext";

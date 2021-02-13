@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import React, { useState, useEffect, useRef } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import { Form } from "react-bootstrap";
 import Autosuggest from "react-autosuggest";
 
@@ -14,13 +14,14 @@ export default function AddUser({ team }) {
   const [value, setValue] = useState("");
   // All suggestions - usernames from database
   const [suggestions, setSuggestions] = useState([]);
+  const autosuggestRef = useRef();
 
   const addUserHandler = async (id) => {
     const newArray = members.map((member) => member.id);
     if (!newArray.includes(id)) {
       newArray.push(id);
     }
-    await addUserToTeam(team.id, newArray).then(() => {});
+    await addUserToTeam(team.id, newArray);
   };
 
   // On component first time render get all users and save them in array "allUsers"
@@ -105,6 +106,7 @@ export default function AddUser({ team }) {
               getSuggestionValue={getSuggestionValue}
               renderSuggestion={renderSuggestion}
               inputProps={inputProps}
+              ref={autosuggestRef}
               theme={{
                 input: "form-control",
               }}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Chat from "./Chat";
-import { useAuth } from "../contexts/AuthContext";
+import Chat from "../Chat/Chat";
+import { useAuth } from "../../contexts/AuthContext";
 import TeamSettings from "./TeamSettings";
-import TeamProjects from "./TeamProjects";
+import TeamProjects from "../Projects/TeamProjects";
 
 import { Tabs, Tab } from "react-bootstrap";
 

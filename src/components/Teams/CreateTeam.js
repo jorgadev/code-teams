@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import TeamsModal from "./TeamsModal";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function CreateTeam({ activeUser, setUserTeams }) {
   // By default don't show modal

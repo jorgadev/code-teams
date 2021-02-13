@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import Subnavbar from "./Subnavbar";
-import Navbar from "./Navbar";
+import Subnavbar from "../Subnavbar";
+import Navbar from "../Navbar";
 
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useHistory, Redirect } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
   // Create refs for email and password and implement currentUser and login from context

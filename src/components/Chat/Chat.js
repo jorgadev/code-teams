@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import ChatMessage from "./ChatMessage";
 import * as firebase from "firebase/app";
-import { firestore, auth } from "../firebase";
+import { firestore, auth } from "../../firebase";
 import { Form, Button } from "react-bootstrap";
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -44,7 +44,7 @@ export default function Chat({ team, activeUser }) {
 
   return (
     <div className="Chat">
-      <div className="px-3">
+      <div className="px-3 messages-wrapper">
         {/* we will loop over the message and return a
         ChatMessage component for each message */}
         {messages &&

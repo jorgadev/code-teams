@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Modal, Button, Alert, Form } from "react-bootstrap";
 import RemoveIcon from "@material-ui/icons/Remove";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 // Modal for project add
 const ProjectModal = (props) => {
@@ -35,6 +35,7 @@ const ProjectModal = (props) => {
         todos: todos,
       };
       createNewProjectInDb(projectObj);
+      setTodos("");
       props.setModalShow(false);
     } else {
       setError("Failed to create project");

@@ -3,7 +3,7 @@ import TeamSquare from "./TeamSquare";
 import CreateTeam from "./CreateTeam";
 import Team from "./Team";
 
-import { useAuth, AuthProvider } from "../contexts/AuthContext";
+import { useAuth, AuthProvider } from "../../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function Teams({ activeUser }) {

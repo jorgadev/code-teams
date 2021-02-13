@@ -80,11 +80,6 @@ export function AuthProvider({ children }) {
     return data.docs.map((d) => d.data());
   }
 
-  // Function insert data into new team by passed id
-  function createNewTeam(teamObj) {
-    firestore.collection("teams").doc(teamObj.id).set(teamObj);
-  }
-
   // Delete team document from db by passed id
   async function deleteTeamFromDb(id) {
     return await firestore.collection("teams").doc(id).delete();
@@ -131,14 +126,45 @@ export function AuthProvider({ children }) {
     );
   }
 
-  // Create new default project in db
-  async function createNewProjectInDb(projectObj) {
-    return firestore.collection("projects").doc(projectObj.id).set(projectObj);
+  // Insert new project with all todos in database
+  function createNewProjectInDb(projectObj) {
+    const projectsRef = firestore.collection("projects");
+    let projectId = null;
+    projectsRef.add(projectObj).then((res) => {
+      projectId = res.id;
+      // When added, pick an id and add it too
+      projectsRef.doc(projectId).update({ id: projectId });
+      // Create an array which will contain todos ids
+      const todosArr = [];
+      // If project has some todos, add them too
+      if (projectObj.todos.length > 0) {
+        // For each todo
+        projectObj.todos.forEach((todo) => {
+          const todoObj = {
+            project: res.id,
+            name: todo,
+            completed: false,
+            solves: [],
+          };
+          // Create todos collection
+          const todosRef = firestore.collection("todos");
+          // Add todo as document to collection and set its id
+          todosRef.add(todoObj).then((res) => {
+            todosRef.doc(res.id).update({ id: res.id });
+            todosArr.push(res.id);
+            projectsRef.doc(projectId).update({ todos: todosArr });
+          });
+        });
+      }
+    });
   }
 
   // Insert new blank project in database
-  function createBlankProject() {
-    return firestore.collection("projects").add({});
+  function createNewTeamInDb(teamObj) {
+    const teamsRef = firestore.collection("teams");
+    teamsRef.add(teamObj).then((res) => {
+      teamsRef.doc(res.id).update({ id: res.id });
+    });
   }
 
   // Delete project doc from db by passed id
@@ -155,6 +181,12 @@ export function AuthProvider({ children }) {
       .get();
     // Get data from each user fetched from db
     return data.docs.map((d) => d.data());
+  }
+
+  function updateTodos(projectId) {
+    // todos.forEach((todo) => {
+    //
+    // });
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
@@ -179,8 +211,6 @@ export function AuthProvider({ children }) {
     insertDefaultUser,
     getActiveUser,
     getAllUsers,
-    createBlankTeam,
-    createNewTeam,
     getTeams,
     deleteTeamFromDb,
     getTeamById,
@@ -188,9 +218,10 @@ export function AuthProvider({ children }) {
     removeUserFromTeam,
     addUserToTeam,
     createNewProjectInDb,
-    createBlankProject,
+    createNewTeamInDb,
     deleteProjectFromDb,
     getProjectsByTeamId,
+    updateTodos,
   };
 
   return (

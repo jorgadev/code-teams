@@ -28,7 +28,7 @@ export default function TeamProjects({ team, activeUser }) {
                       Click me!
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
-                      <Card.Body>Hello! I'm the body</Card.Body>
+                      <Card.Body>{JSON.stringify(project)}</Card.Body>
                     </Accordion.Collapse>
                   </Card>
                   <Card>
@@ -56,6 +56,7 @@ export default function TeamProjects({ team, activeUser }) {
           show={modalShow}
           onHide={() => setModalShow(false)}
           setModalShow={setModalShow}
+          modalShow={modalShow}
           team={team}
           setProjects={setProjects}
         />

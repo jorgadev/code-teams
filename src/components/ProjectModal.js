@@ -8,43 +8,40 @@ const ProjectModal = (props) => {
   console.log(props);
   const [error, setError] = useState("");
   const [todos, setTodos] = useState([]);
-  const {
-    createNewProjectInDb,
-    createBlankProject,
-    deleteProjectFromDb,
-    getProjectsByTeamId,
-  } = useAuth();
+  const { getProjectsByTeamId, createNewProjectInDb } = useAuth();
   const projectNameRef = useRef();
   const textAreaRef = useRef();
 
   useEffect(() => {
-    getProjectsByTeamId(props.team.id).then((res) => {
-      props.setProjects(res);
-    });
-  }, []);
+    let timer = setTimeout(() => {
+      getProjectsByTeamId(props.team.id).then((res) => {
+        props.setProjects(res);
+      });
+    }, [1000]);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [props.modalShow]);
 
   // Create new project when button create is clicked
   const createNewProject = async () => {
     const projectName = projectNameRef.current.value;
-    await createBlankProject().then((res) => {
+    if (projectName !== "") {
       let projectObj = {
-        id: res.id,
         team: props.team.id,
         name: projectName,
         completed: false,
-        todos: [],
+        todos: todos,
       };
-      if (projectName !== "") {
-        createNewProjectInDb(projectObj);
-        props.setModalShow(false);
-      } else {
-        setError("Failed to create project");
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-        deleteProjectFromDb(res.id);
-      }
-    });
+      createNewProjectInDb(projectObj);
+      props.setModalShow(false);
+    } else {
+      setError("Failed to create project");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
   };
 
   // Add todo to array

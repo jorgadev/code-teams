@@ -21,12 +21,7 @@ export default function TeamsModal(props) {
   const [teamName, setTeamName] = useState("");
   const [error, setError] = useState("");
   // Get function which creates new team from context
-  const {
-    createBlankTeam,
-    createNewTeam,
-    deleteTeamFromDb,
-    getTeams,
-  } = useAuth();
+  const { createNewTeamInDb, getTeams } = useAuth();
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
   const getSuggestions = (value) => {
@@ -100,34 +95,29 @@ export default function TeamsModal(props) {
 
   // Create object which will be stored into database teams collection
   const createTeamHandler = async () => {
-    await createBlankTeam().then((res) => {
-      let teamObj = {
-        creator: activeUser.id,
-        name: teamName,
-        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-        members: selectedUsers.map((user) => user.id),
-        id: res.id,
-      };
-      // Don't create new team if no members added
-      if (
-        teamObj.members.length > 1 &&
-        teamName !== "" &&
-        teamName.length > 1 &&
-        teamName.length < 20
-      ) {
-        createNewTeam(teamObj);
-        props.setModalShow(false);
-        setSelectedUsers([activeUser.id]);
-        setTeamName("");
-        getTeams(activeUser).then((res) => props.setUserTeams(res));
-      } else {
-        setError("Failed to create team");
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-        deleteTeamFromDb(res.id);
-      }
-    });
+    let teamObj = {
+      creator: activeUser.id,
+      name: teamName,
+      color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+      members: selectedUsers.map((user) => user.id),
+    };
+    if (
+      teamObj.members.length > 1 &&
+      teamName !== "" &&
+      teamName.length > 1 &&
+      teamName.length < 20
+    ) {
+      createNewTeamInDb(teamObj);
+      props.setModalShow(false);
+      setSelectedUsers([activeUser.id]);
+      setTeamName("");
+      getTeams(activeUser).then((res) => props.setUserTeams(res));
+    } else {
+      setError("Failed to create team");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
   };
 
   const removeBadge = (e) => {

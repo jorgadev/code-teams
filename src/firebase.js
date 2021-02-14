@@ -4,13 +4,12 @@ import "firebase/firestore";
 import "firebase/storage";
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyABcDZLhOScnJZpr-AVObIkYAb0fbe8Nhg",
-  authDomain: "code-teams.firebaseapp.com",
-  databaseURL: "https://code-teams-default-rtdb.firebaseio.com",
-  projectId: "code-teams",
-  storageBucket: "code-teams.appspot.com",
-  messagingSenderId: "759472991088",
-  appId: "1:759472991088:web:d282368045b86a0067fdb5",
+  apiKey: "AIzaSyCsbJmeuDb_SXLNiNxGHJdDON-u6pg3lQ0",
+  authDomain: "code-teams-2a209.firebaseapp.com",
+  projectId: "code-teams-2a209",
+  storageBucket: "code-teams-2a209.appspot.com",
+  messagingSenderId: "1012426688769",
+  appId: "1:1012426688769:web:c42392738900a0359db300",
 });
 
 export const auth = app.auth();

@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
     let userObj = {
       id: user.uid,
       avatar:
-        "https://firebasestorage.googleapis.com/v0/b/code-teams.appspot.com/o/default-avatar.jpg?alt=media&token=71dff050-cf42-439a-9902-d01b1564a14b",
+        "https://firebasestorage.googleapis.com/v0/b/code-teams-2a209.appspot.com/o/default-avatar.jpg?alt=media&token=dadc7e68-4fbb-45f3-85ec-364e38841846",
       username: user.email.split("@")[0],
     };
     firestore.collection("users").doc(user.uid).set(userObj);
@@ -183,10 +183,15 @@ export function AuthProvider({ children }) {
     return data.docs.map((d) => d.data());
   }
 
-  function updateTodos(projectId) {
-    // todos.forEach((todo) => {
-    //
-    // });
+  // Find an team from firestore by passed id
+  async function getTodosByProjectId(id) {
+    // Wait for data to be fetched (search for users with same id)
+    const data = await firestore
+      .collection("todos")
+      .where("project", "==", id)
+      .get();
+    // Get data from each user fetched from db
+    return data.docs.map((d) => d.data());
   }
 
   // When component is mounted onAuthStateChanged recognizes when state changes and set user
@@ -221,7 +226,7 @@ export function AuthProvider({ children }) {
     createNewTeamInDb,
     deleteProjectFromDb,
     getProjectsByTeamId,
-    updateTodos,
+    getTodosByProjectId,
   };
 
   return (

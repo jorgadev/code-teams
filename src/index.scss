@@ -248,7 +248,6 @@ ul {
 }
 
 .tab-content {
-  background-color: $lightgray;
   height: calc(100vh - 203px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -258,10 +257,17 @@ ul {
   #controlled-tab-example-tabpane-home,
   #controlled-tab-example-tabpane-contact {
     height: 100%;
+    background-color: $lightgray;
 
     .Chat {
       height: 100%;
     }
+  }
+
+  #controlled-tab-example-tabpane-profile {
+    background-color: #fff;
+    height: 100%;
+    padding-top: 32px;
   }
 }
 
@@ -345,6 +351,18 @@ ul {
 .TeamProjects {
   .project-wrapper {
     background-color: #fff;
+    border: 1px solid $darkgray;
+    padding: 50px;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: -15px;
+      left: 50px;
+      background-color: #fff;
+      padding: 0 20px;
+      font-size: 1.2rem;
+    }
   }
 }
 

@@ -5,7 +5,6 @@ import { useAuth } from "../../contexts/AuthContext";
 
 // Modal for project add
 const ProjectModal = (props) => {
-  console.log(props);
   const [error, setError] = useState("");
   const [todos, setTodos] = useState([]);
   const { getProjectsByTeamId, createNewProjectInDb } = useAuth();

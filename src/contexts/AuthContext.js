@@ -82,7 +82,7 @@ export function AuthProvider({ children }) {
 
   // Delete team document from db by passed id
   async function deleteTeamFromDb(id) {
-    return await firestore.collection("teams").doc(id).delete();
+    await firestore.collection("teams").doc(id).delete();
   }
 
   // Find an team from firestore by passed id

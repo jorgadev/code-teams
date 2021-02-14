@@ -1,9 +1,11 @@
 import React from "react";
 import AddUser from "./AddUser";
 import UsersList from "./UsersList";
+import ProjectsList from "./ProjectsList";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function TeamSettings({ team }) {
   const { deleteTeamFromDb } = useAuth();
@@ -30,14 +32,19 @@ export default function TeamSettings({ team }) {
             <h3 className="text-center lead mt-3">{team.name}</h3>
             <hr className="my-3" />
             <AddUser team={team} />
-            <hr className="my-3" />
-            <h3>Participants:</h3>
-            <UsersList team={team} />
+            <UsersList team={team} className="mt-3" />
           </div>
-          <div className="settings-main">
-            <button onClick={() => deleteTeamHandler(team.id)}>
-              Delete team
-            </button>
+          <div className="settings-main bg-light w-100 px-3">
+            <h5 className="my-3">Projects</h5>
+            <ProjectsList team={team} />
+            <div className="d-flex justify-content-center">
+              <Button
+                className="btn btn-outline-primary my-4"
+                onClick={() => deleteTeamHandler(team.id)}
+              >
+                Delete team
+              </Button>
+            </div>
           </div>
         </div>
       )}

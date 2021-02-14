@@ -349,6 +349,15 @@ ul {
 }
 
 .TeamProjects {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  .spinner {
+    align-self: center;
+  }
+
   .project-wrapper {
     background-color: #fff;
     border: 1px solid $darkgray;
@@ -362,6 +371,22 @@ ul {
       background-color: #fff;
       padding: 0 20px;
       font-size: 1.2rem;
+    }
+  }
+
+  .add-projects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Accordion {
+    .card {
+      border-radius: 0;
+
+      .card-header {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -380,6 +405,32 @@ ul {
         transform: scale(1.1);
       }
     }
+  }
+}
+
+.ProjectsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .remove-project {
+      cursor: pointer;
+      color: $darkgray;
+      &:hover {
+        transform: scale(1.1);
+        color: $darkgray;
+        color: #a0a1a1;
+      }
+    }
+  }
+
+  .spinner {
+    align-self: center;
   }
 }
 

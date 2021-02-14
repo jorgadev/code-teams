@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-
 import ClearIcon from "@material-ui/icons/Clear";
+import { useAuth } from "../../contexts/AuthContext";
 
 // Recieve props from CreateTeam component
 export default function AutoSuggestInput({ team }) {

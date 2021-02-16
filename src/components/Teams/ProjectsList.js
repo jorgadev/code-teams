@@ -25,17 +25,15 @@ export default function ProjectsList({ team }) {
         <>
           {projects.map((project) => {
             return (
-              <>
-                <ListGroup>
-                  <ListGroup.Item>
-                    {project.name}
-                    <ClearIcon
-                      className="remove-project"
-                      onClick={() => removeProjectHandler(project.id)}
-                    />
-                  </ListGroup.Item>
-                </ListGroup>
-              </>
+              <ListGroup key={project.id}>
+                <ListGroup.Item>
+                  {project.name}
+                  <ClearIcon
+                    className="remove-project"
+                    onClick={() => removeProjectHandler(project.id)}
+                  />
+                </ListGroup.Item>
+              </ListGroup>
             );
           })}
         </>

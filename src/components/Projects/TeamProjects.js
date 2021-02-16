@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ProjectModal from "./ProjectModal";
 import Todo from "./Todo";
-import {
-  Button,
-  ListGroup,
-  Popover,
-  OverlayTrigger,
-  Form,
-} from "react-bootstrap";
+import { Button, Form, ListGroup, Modal } from "react-bootstrap";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { useAuth } from "../../contexts/AuthContext";
@@ -16,33 +10,47 @@ export default function TeamProjects({ team, activeUser }) {
   const [projects, setProjects] = useState();
   const [projectsDOM, setProjectsDOM] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const { getProjectsByTeamId, getTodosByProjectId } = useAuth();
+  const {
+    getProjectsByTeamId,
+    getTodosByProjectId,
+    createNewTodoInDb,
+  } = useAuth();
+  const [addTodoModalShow, setAddTodoModalShow] = useState(false);
+  const [newTodo, setNewTodo] = useState("");
+  const [activeProject, setActiveProject] = useState(null);
 
-  useEffect(() => {
+  const fetchProjects = () => {
     getProjectsByTeamId(team.id).then((res) => {
       const projects = res;
       const newProjectsDOM = [...projectsDOM];
       projects.forEach((project) => {
         getTodosByProjectId(project.id).then((todos) => {
-          newProjectsDOM.push({ name: project.name, todos: todos });
+          newProjectsDOM.push({
+            name: project.name,
+            todos: todos,
+            id: project.id,
+          });
         });
       });
       setProjectsDOM(newProjectsDOM);
     });
+  };
+
+  useEffect(() => {
+    fetchProjects();
   }, []);
 
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Add Todo</Popover.Title>
-      <Popover.Content>
-        <Form>
-          <Form.Group>
-            <Form.Control type="text" />
-          </Form.Group>
-        </Form>
-      </Popover.Content>
-    </Popover>
-  );
+  const handleClose = (projectId) => {
+    setAddTodoModalShow(true);
+    if (newTodo !== "") {
+      createNewTodoInDb(newTodo, activeProject);
+    }
+    setAddTodoModalShow(false);
+  };
+  const handleShow = (projectId) => {
+    setAddTodoModalShow(true);
+    setActiveProject(projectId);
+  };
 
   return (
     <div className="TeamProjects">
@@ -55,7 +63,7 @@ export default function TeamProjects({ team, activeUser }) {
               </span>
               {project.todos.map((todo, idx) => {
                 return (
-                  <ListGroup>
+                  <ListGroup key={todo.id}>
                     <Todo
                       view={activeUser.id === team.creator ? "admin" : "user"}
                       todo={todo}
@@ -68,13 +76,12 @@ export default function TeamProjects({ team, activeUser }) {
               })}
               {activeUser.id === team.creator && (
                 <div className="d-flex justify-content-center mt-3">
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <AddCircleIcon className="add-circle-icon" />
-                  </OverlayTrigger>
+                  <AddCircleIcon
+                    className="add-circle-icon"
+                    onClick={() => {
+                      handleShow(project.id);
+                    }}
+                  />
                 </div>
               )}
             </div>
@@ -103,6 +110,26 @@ export default function TeamProjects({ team, activeUser }) {
           team={team}
           setProjects={setProjects}
         />
+        <Modal show={addTodoModalShow} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add todo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group>
+              <Form.Label>Todo:</Form.Label>
+              <Form.Control
+                type="text"
+                value={newTodo}
+                onChange={(e) => setNewTodo(e.target.value)}
+              />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );

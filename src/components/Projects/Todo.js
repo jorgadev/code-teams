@@ -3,7 +3,13 @@ import { ListGroup } from "react-bootstrap";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAuth } from "../../contexts/AuthContext";
 
-export default function Todo({ view, todo, projectsDOM, setProjectsDOM }) {
+export default function Todo({
+  view,
+  todo,
+  projectsDOM,
+  setProjectsDOM,
+  project,
+}) {
   const { deleteTodoFromDb } = useAuth();
 
   const deleteTodoHandler = (todoId) => {

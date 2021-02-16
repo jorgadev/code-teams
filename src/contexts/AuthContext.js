@@ -167,6 +167,20 @@ export function AuthProvider({ children }) {
     });
   }
 
+  // Insert new blank project in database
+  function createNewTodoInDb(todo, projectId) {
+    const todoObj = {
+      project: projectId,
+      name: todo,
+      status: "open",
+      solves: [],
+    };
+    const todosRef = firestore.collection("todos");
+    todosRef.add(todoObj).then((res) => {
+      todosRef.doc(res.id).update({ id: res.id });
+    });
+  }
+
   // Delete project doc from db by passed id
   async function deleteProjectFromDb(id) {
     return await firestore.collection("projects").doc(id).delete();
@@ -233,6 +247,7 @@ export function AuthProvider({ children }) {
     getProjectsByTeamId,
     getTodosByProjectId,
     deleteTodoFromDb,
+    createNewTodoInDb,
   };
 
   return (

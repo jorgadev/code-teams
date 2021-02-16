@@ -143,7 +143,7 @@ export function AuthProvider({ children }) {
           const todoObj = {
             project: res.id,
             name: todo,
-            completed: false,
+            status: "open",
             solves: [],
           };
           // Create todos collection
@@ -170,6 +170,11 @@ export function AuthProvider({ children }) {
   // Delete project doc from db by passed id
   async function deleteProjectFromDb(id) {
     return await firestore.collection("projects").doc(id).delete();
+  }
+
+  // Delete project doc from db by passed id
+  async function deleteTodoFromDb(id) {
+    return await firestore.collection("todos").doc(id).delete();
   }
 
   // Find an team from firestore by passed id
@@ -227,6 +232,7 @@ export function AuthProvider({ children }) {
     deleteProjectFromDb,
     getProjectsByTeamId,
     getTodosByProjectId,
+    deleteTodoFromDb,
   };
 
   return (

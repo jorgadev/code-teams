@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ProjectModal from "./ProjectModal";
-import { Accordion, Card, Spinner, Form, Button } from "react-bootstrap";
+import Todo from "./Todo";
+import {
+  Button,
+  ListGroup,
+  Popover,
+  OverlayTrigger,
+  Form,
+} from "react-bootstrap";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -23,88 +31,79 @@ export default function TeamProjects({ team, activeUser }) {
     });
   }, []);
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Add Todo</Popover.Title>
+      <Popover.Content>
+        <Form>
+          <Form.Group>
+            <Form.Control type="text" />
+          </Form.Group>
+        </Form>
+      </Popover.Content>
+    </Popover>
+  );
+
   return (
-    <>
-      <div className="TeamProjects">
-        {projectsDOM.length > 0 ? (
-          projectsDOM.map((project) => {
-            return (
-              <div className="project-wrapper mb-5" key={project.id}>
-                <span>
-                  <strong>{project.name}</strong>
-                </span>
-                {project.todos.map((todo, idx) => {
-                  return (
-                    <Accordion
-                      defaultActiveKey="0"
-                      key={todo.id}
-                      className="Accordion"
-                    >
-                      <Card>
-                        <Accordion.Toggle
-                          as={Card.Header}
-                          eventKey={idx.toString()}
-                        >
-                          {idx + 1}. {todo.name}
-                        </Accordion.Toggle>
-                        <Accordion.Collapse eventKey={idx.toString()}>
-                          <Card.Body>
-                            <Form>
-                              <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Label>Description:</Form.Label>
-                                <Form.Control
-                                  as="textarea"
-                                  rows={3}
-                                  placeholder="Describe how did you solve a problem.."
-                                />
-                              </Form.Group>
-                              <Form.Group>
-                                <Form.Label>URL: </Form.Label>
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Put an URL of picture or commit you made.."
-                                />
-                              </Form.Group>
-                              <div class="d-flex justify-content-end mt-3">
-                                <Button className="btn btn-primary">
-                                  Solve
-                                </Button>
-                              </div>
-                            </Form>
-                          </Card.Body>
-                        </Accordion.Collapse>
-                      </Card>
-                    </Accordion>
-                  );
-                })}
-              </div>
-            );
-          })
-        ) : (
-          <Spinner animation="border" variant="primary" className="spinner" />
+    <div className="TeamProjects">
+      {projectsDOM.length > 0 ? (
+        projectsDOM.map((project) => {
+          return (
+            <div className="project-wrapper mb-5" key={project.id}>
+              <span>
+                <strong>{project.name}</strong>
+              </span>
+              {project.todos.map((todo, idx) => {
+                return (
+                  <ListGroup>
+                    <Todo
+                      view={activeUser.id === team.creator ? "admin" : "user"}
+                      todo={todo}
+                      idx={idx}
+                      projectsDOM={projectsDOM}
+                      setProjectsDOM={setProjectsDOM}
+                    />
+                  </ListGroup>
+                );
+              })}
+              {activeUser.id === team.creator && (
+                <div className="d-flex justify-content-center mt-3">
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="bottom"
+                    overlay={popover}
+                  >
+                    <AddCircleIcon className="add-circle-icon" />
+                  </OverlayTrigger>
+                </div>
+              )}
+            </div>
+          );
+        })
+      ) : (
+        <p className="text-center lead">There are no projects.</p>
+      )}
+      <div className="add-projects">
+        {activeUser.id === team.creator && (
+          <>
+            <Button
+              variant="primary"
+              className="add-project btn btn-primary my-4"
+              onClick={() => setModalShow(true)}
+            >
+              + New Project
+            </Button>
+          </>
         )}
-        <div className="add-projects">
-          {activeUser.id === team.creator && (
-            <>
-              <Button
-                variant="primary"
-                className="add-project btn btn-primary my-4"
-                onClick={() => setModalShow(true)}
-              >
-                + New Project
-              </Button>
-            </>
-          )}
-          <ProjectModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            setModalShow={setModalShow}
-            modalShow={modalShow}
-            team={team}
-            setProjects={setProjects}
-          />
-        </div>
+        <ProjectModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          setModalShow={setModalShow}
+          modalShow={modalShow}
+          team={team}
+          setProjects={setProjects}
+        />
       </div>
-    </>
+    </div>
   );
 }
